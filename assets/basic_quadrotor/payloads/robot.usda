@@ -1,0 +1,145 @@
+#usda 1.0
+(
+    defaultPrim = "basic_quadrotor"
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+over "basic_quadrotor" (
+    prepend apiSchemas = ["IsaacRobotAPI", "IsaacLinkAPI"]
+)
+{
+    custom rel isaac:physics:robotJoints
+    prepend rel isaac:physics:robotJoints = [
+        </basic_quadrotor/Physics/motor1_joint>,
+        </basic_quadrotor/Physics/motor2_joint>,
+        </basic_quadrotor/Physics/motor3_joint>,
+        </basic_quadrotor/Physics/motor4_joint>,
+        </basic_quadrotor/Physics/blade1_joint>,
+        </basic_quadrotor/Physics/blade2_joint>,
+        </basic_quadrotor/Physics/blade3_joint>,
+        </basic_quadrotor/Physics/blade4_joint>,
+    ]
+    custom rel isaac:physics:robotLinks
+    prepend rel isaac:physics:robotLinks = [
+        </basic_quadrotor/Geometry/base_link>,
+        </basic_quadrotor/Geometry/base_link/frame>,
+        </basic_quadrotor/Geometry/base_link/frame/motor1>,
+        </basic_quadrotor/Geometry/base_link/frame/motor2>,
+        </basic_quadrotor/Geometry/base_link/frame/motor3>,
+        </basic_quadrotor/Geometry/base_link/frame/motor4>,
+        </basic_quadrotor/Geometry/base_link/frame/motor1/blade1>,
+        </basic_quadrotor/Geometry/base_link/frame/motor2/blade2>,
+        </basic_quadrotor/Geometry/base_link/frame/motor3/blade3>,
+        </basic_quadrotor/Geometry/base_link/frame/motor4/blade4>,
+    ]
+
+    over "Physics"
+    {
+        over "motor1_joint" (
+            prepend apiSchemas = ["IsaacJointAPI"]
+        )
+        {
+        }
+
+        over "motor2_joint" (
+            prepend apiSchemas = ["IsaacJointAPI"]
+        )
+        {
+        }
+
+        over "motor3_joint" (
+            prepend apiSchemas = ["IsaacJointAPI"]
+        )
+        {
+        }
+
+        over "motor4_joint" (
+            prepend apiSchemas = ["IsaacJointAPI"]
+        )
+        {
+        }
+
+        over "blade1_joint" (
+            prepend apiSchemas = ["IsaacJointAPI"]
+        )
+        {
+        }
+
+        over "blade2_joint" (
+            prepend apiSchemas = ["IsaacJointAPI"]
+        )
+        {
+        }
+
+        over "blade3_joint" (
+            prepend apiSchemas = ["IsaacJointAPI"]
+        )
+        {
+        }
+
+        over "blade4_joint" (
+            prepend apiSchemas = ["IsaacJointAPI"]
+        )
+        {
+        }
+    }
+
+    over "Geometry"
+    {
+        over "base_link" (
+            prepend apiSchemas = ["IsaacLinkAPI"]
+        )
+        {
+            over "frame" (
+                prepend apiSchemas = ["IsaacLinkAPI"]
+            )
+            {
+                over "motor1" (
+                    prepend apiSchemas = ["IsaacLinkAPI"]
+                )
+                {
+                    over "blade1" (
+                        prepend apiSchemas = ["IsaacLinkAPI"]
+                    )
+                    {
+                    }
+                }
+
+                over "motor2" (
+                    prepend apiSchemas = ["IsaacLinkAPI"]
+                )
+                {
+                    over "blade2" (
+                        prepend apiSchemas = ["IsaacLinkAPI"]
+                    )
+                    {
+                    }
+                }
+
+                over "motor3" (
+                    prepend apiSchemas = ["IsaacLinkAPI"]
+                )
+                {
+                    over "blade3" (
+                        prepend apiSchemas = ["IsaacLinkAPI"]
+                    )
+                    {
+                    }
+                }
+
+                over "motor4" (
+                    prepend apiSchemas = ["IsaacLinkAPI"]
+                )
+                {
+                    over "blade4" (
+                        prepend apiSchemas = ["IsaacLinkAPI"]
+                    )
+                    {
+                    }
+                }
+            }
+        }
+    }
+}

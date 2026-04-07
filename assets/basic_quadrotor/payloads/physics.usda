@@ -1,0 +1,177 @@
+#usda 1.0
+(
+    defaultPrim = "basic_quadrotor"
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+# Physics layer for basic_quadrotor.
+# All mass/inertia values consolidated here; physx variant only.
+# Total system mass: 1.000 kg
+#   base_link : 0.001
+#   frame     : 0.759
+#   motor1-4  : 4 x 0.050 = 0.200
+#   blade1-4  : 4 x 0.010 = 0.040
+
+over "basic_quadrotor"
+{
+    over "Geometry"
+    {
+        over "base_link" (
+            prepend apiSchemas = [
+                "PhysicsArticulationRootAPI",
+                "PhysxArticulationAPI",
+                "PhysicsMassAPI",
+            ]
+        )
+        {
+            bool physxArticulation:enabledSelfCollisions = 0
+            point3f physics:centerOfMass = (0, 0, 0)
+            float3 physics:diagonalInertia = (1e-6, 1e-6, 1e-6)
+            float physics:mass = 0.001
+            quatf physics:principalAxes = (1, 0, 0, 0)
+
+            over "frame" (
+                prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+            )
+            {
+                point3f physics:centerOfMass = (0, 0, 0)
+                float3 physics:diagonalInertia = (0.00128, 0.00128, 0.00128)
+                float physics:mass = 0.759
+                quatf physics:principalAxes = (1, 0, 0, 0)
+
+                over "motor1" (
+                    prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                )
+                {
+                    point3f physics:centerOfMass = (0, 0, 0)
+                    float3 physics:diagonalInertia = (4.9e-6, 6.2e-6, 6.2e-6)
+                    float physics:mass = 0.05
+                    quatf physics:principalAxes = (1, 0, 0, 0)
+
+                    over "blade1" (
+                        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                    )
+                    {
+                        point3f physics:centerOfMass = (0, 0, 0)
+                        float3 physics:diagonalInertia = (0.001, 0.001, 0.001)
+                        float physics:mass = 0.01
+                        quatf physics:principalAxes = (1, 0, 0, 0)
+                    }
+                }
+
+                over "motor2" (
+                    prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                )
+                {
+                    point3f physics:centerOfMass = (0, 0, 0)
+                    float3 physics:diagonalInertia = (4.9e-6, 6.2e-6, 6.2e-6)
+                    float physics:mass = 0.05
+                    quatf physics:principalAxes = (1, 0, 0, 0)
+
+                    over "blade2" (
+                        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                    )
+                    {
+                        point3f physics:centerOfMass = (0, 0, 0)
+                        float3 physics:diagonalInertia = (0.001, 0.001, 0.001)
+                        float physics:mass = 0.01
+                        quatf physics:principalAxes = (1, 0, 0, 0)
+                    }
+                }
+
+                over "motor3" (
+                    prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                )
+                {
+                    point3f physics:centerOfMass = (0, 0, 0)
+                    float3 physics:diagonalInertia = (4.9e-6, 6.2e-6, 6.2e-6)
+                    float physics:mass = 0.05
+                    quatf physics:principalAxes = (1, 0, 0, 0)
+
+                    over "blade3" (
+                        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                    )
+                    {
+                        point3f physics:centerOfMass = (0, 0, 0)
+                        float3 physics:diagonalInertia = (0.001, 0.001, 0.001)
+                        float physics:mass = 0.01
+                        quatf physics:principalAxes = (1, 0, 0, 0)
+                    }
+                }
+
+                over "motor4" (
+                    prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                )
+                {
+                    point3f physics:centerOfMass = (0, 0, 0)
+                    float3 physics:diagonalInertia = (4.9e-6, 6.2e-6, 6.2e-6)
+                    float physics:mass = 0.05
+                    quatf physics:principalAxes = (1, 0, 0, 0)
+
+                    over "blade4" (
+                        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+                    )
+                    {
+                        point3f physics:centerOfMass = (0, 0, 0)
+                        float3 physics:diagonalInertia = (0.001, 0.001, 0.001)
+                        float physics:mass = 0.01
+                        quatf physics:principalAxes = (1, 0, 0, 0)
+                    }
+                }
+            }
+        }
+    }
+
+    over "Physics"
+    {
+        over "motor1_joint" (
+            prepend apiSchemas = ["PhysxJointAPI"]
+        )
+        {
+        }
+
+        over "motor2_joint" (
+            prepend apiSchemas = ["PhysxJointAPI"]
+        )
+        {
+        }
+
+        over "motor3_joint" (
+            prepend apiSchemas = ["PhysxJointAPI"]
+        )
+        {
+        }
+
+        over "motor4_joint" (
+            prepend apiSchemas = ["PhysxJointAPI"]
+        )
+        {
+        }
+
+        over "blade1_joint" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "PhysxJointAPI"]
+        )
+        {
+        }
+
+        over "blade2_joint" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "PhysxJointAPI"]
+        )
+        {
+        }
+
+        over "blade3_joint" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "PhysxJointAPI"]
+        )
+        {
+        }
+
+        over "blade4_joint" (
+            prepend apiSchemas = ["PhysicsDriveAPI:angular", "PhysicsJointStateAPI:angular", "PhysxJointAPI"]
+        )
+        {
+        }
+    }
+}

@@ -1,0 +1,5059 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "URDF USD Converter v0.1.0"
+    }
+    doc = """Generated from Composed Stage of root layer /tmp/tmp3d9huabk/basic_quadrotor.usdc
+
+
+Generated from Composed Stage of root layer /home/robotsix-docker/LS2N/ros2_ws/src/rs_isaac_uav_sim/assets/crazy2fly/usdex/basic_quadrotor.usdc
+
+
+Generated from Composed Stage of root layer /home/robotsix-docker/LS2N/ros2_ws/src/rs_isaac_uav_sim/assets/crazy2fly/temp/crazy2fly_fixed.usd
+
+
+Generated from Composed Stage of root layer /home/robotsix-docker/LS2N/ros2_ws/src/rs_isaac_uav_sim/assets/crazy2fly/crazy2fly_fixed/payloads/base.usd
+"""
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Scope "Instances"
+{
+    def Xform "BottomFrame" (
+        prepend references = @./geometries.usd@</Geometries/BottomFrame>
+    )
+    {
+        over "BottomFrame" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/BottomFrame/VisualMaterials/tn__Fibre_de_carbone__Tresse_vZ0jX4>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Fibre_de_carbone__Tresse_vZ0jX4" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Fibre_de_carbone__Tresse_vZ0jX4>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "BottomFrame_1" (
+        prepend references = @./geometries.usd@</Geometries/BottomFrame>
+    )
+    {
+        over "BottomFrame" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "TopFrame" (
+        prepend references = @./geometries.usd@</Geometries/TopFrame>
+    )
+    {
+        over "TopFrame" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/TopFrame/VisualMaterials/tn__Fibre_de_carbone__Tresse_vZ0jX4>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Fibre_de_carbone__Tresse_vZ0jX4" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Fibre_de_carbone__Tresse_vZ0jX4>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "TopFrame_1" (
+        prepend references = @./geometries.usd@</Geometries/TopFrame>
+    )
+    {
+        over "TopFrame" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Spacer" (
+        prepend references = @./geometries.usd@</Geometries/Spacer>
+    )
+    {
+        over "Spacer" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Spacer/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Spacer_1" (
+        prepend references = @./geometries.usd@</Geometries/Spacer>
+    )
+    {
+        over "Spacer" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer1_j7m1J" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer1_j7m1J>
+    )
+    {
+        over "tn__Spacer1_j7m1J" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer1_j7m1J/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer1_j7m1J_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer1_j7m1J>
+    )
+    {
+        over "tn__Spacer1_j7m1J" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer2_j7m1J" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer2_j7m1J>
+    )
+    {
+        over "tn__Spacer2_j7m1J" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer2_j7m1J/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer2_j7m1J_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer2_j7m1J>
+    )
+    {
+        over "tn__Spacer2_j7m1J" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer4_j7m1J" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer4_j7m1J>
+    )
+    {
+        over "tn__Spacer4_j7m1J" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer4_j7m1J/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer4_j7m1J_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer4_j7m1J>
+    )
+    {
+        over "tn__Spacer4_j7m1J" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer3_j7m1J" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer3_j7m1J>
+    )
+    {
+        over "tn__Spacer3_j7m1J" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer3_j7m1J/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer3_j7m1J_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer3_j7m1J>
+    )
+    {
+        over "tn__Spacer3_j7m1J" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer5_j7m1J" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer5_j7m1J>
+    )
+    {
+        over "tn__Spacer5_j7m1J" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer5_j7m1J/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer5_j7m1J_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer5_j7m1J>
+    )
+    {
+        over "tn__Spacer5_j7m1J" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer6_j7m1J" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer6_j7m1J>
+    )
+    {
+        over "tn__Spacer6_j7m1J" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer6_j7m1J/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer6_j7m1J_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer6_j7m1J>
+    )
+    {
+        over "tn__Spacer6_j7m1J" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer7_j7m1J" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer7_j7m1J>
+    )
+    {
+        over "tn__Spacer7_j7m1J" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer7_j7m1J/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer7_j7m1J_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer7_j7m1J>
+    )
+    {
+        over "tn__Spacer7_j7m1J" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer11_k88X2AMD" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer11_k88X2AMD>
+    )
+    {
+        over "tn__Spacer11_k88X2AMD" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer11_k88X2AMD/VisualMaterials/tn__Acier__Satin_XIfr1>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_XIfr1" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer11_k88X2AMD_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer11_k88X2AMD>
+    )
+    {
+        over "tn__Spacer11_k88X2AMD" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer12_k88X2AMD" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer12_k88X2AMD>
+    )
+    {
+        over "tn__Spacer12_k88X2AMD" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer12_k88X2AMD/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer12_k88X2AMD_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer12_k88X2AMD>
+    )
+    {
+        over "tn__Spacer12_k88X2AMD" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer13_k88X2AMD" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer13_k88X2AMD>
+    )
+    {
+        over "tn__Spacer13_k88X2AMD" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer13_k88X2AMD/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer13_k88X2AMD_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer13_k88X2AMD>
+    )
+    {
+        over "tn__Spacer13_k88X2AMD" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer21_k88X2AMD" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer21_k88X2AMD>
+    )
+    {
+        over "tn__Spacer21_k88X2AMD" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer21_k88X2AMD/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer21_k88X2AMD_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer21_k88X2AMD>
+    )
+    {
+        over "tn__Spacer21_k88X2AMD" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer22_k88X2AMD" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer22_k88X2AMD>
+    )
+    {
+        over "tn__Spacer22_k88X2AMD" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer22_k88X2AMD/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer22_k88X2AMD_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer22_k88X2AMD>
+    )
+    {
+        over "tn__Spacer22_k88X2AMD" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer23_k88X2AMD" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer23_k88X2AMD>
+    )
+    {
+        over "tn__Spacer23_k88X2AMD" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer23_k88X2AMD/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer23_k88X2AMD_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer23_k88X2AMD>
+    )
+    {
+        over "tn__Spacer23_k88X2AMD" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer41_k88X2AMD" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer41_k88X2AMD>
+    )
+    {
+        over "tn__Spacer41_k88X2AMD" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer41_k88X2AMD/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer41_k88X2AMD_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer41_k88X2AMD>
+    )
+    {
+        over "tn__Spacer41_k88X2AMD" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer42_k88X2AMD" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer42_k88X2AMD>
+    )
+    {
+        over "tn__Spacer42_k88X2AMD" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer42_k88X2AMD/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer42_k88X2AMD_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer42_k88X2AMD>
+    )
+    {
+        over "tn__Spacer42_k88X2AMD" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer43_k88X2AMD" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer43_k88X2AMD>
+    )
+    {
+        over "tn__Spacer43_k88X2AMD" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer43_k88X2AMD/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer43_k88X2AMD_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer43_k88X2AMD>
+    )
+    {
+        over "tn__Spacer43_k88X2AMD" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer31_k88X2AMD" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer31_k88X2AMD>
+    )
+    {
+        over "tn__Spacer31_k88X2AMD" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer31_k88X2AMD/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer31_k88X2AMD_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer31_k88X2AMD>
+    )
+    {
+        over "tn__Spacer31_k88X2AMD" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer32_k88X2AMD" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer32_k88X2AMD>
+    )
+    {
+        over "tn__Spacer32_k88X2AMD" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer32_k88X2AMD/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer32_k88X2AMD_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer32_k88X2AMD>
+    )
+    {
+        over "tn__Spacer32_k88X2AMD" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer33_k88X2AMD" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer33_k88X2AMD>
+    )
+    {
+        over "tn__Spacer33_k88X2AMD" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer33_k88X2AMD/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer33_k88X2AMD_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer33_k88X2AMD>
+    )
+    {
+        over "tn__Spacer33_k88X2AMD" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Spacer_30mm" (
+        prepend references = @./geometries.usd@</Geometries/Spacer_30mm>
+    )
+    {
+        over "Spacer_30mm" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Spacer_30mm/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Spacer_30mm_1" (
+        prepend references = @./geometries.usd@</Geometries/Spacer_30mm>
+    )
+    {
+        over "Spacer_30mm" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Spacer_4cm" (
+        prepend references = @./geometries.usd@</Geometries/Spacer_4cm>
+    )
+    {
+        over "Spacer_4cm" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Spacer_4cm/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Spacer_4cm_1" (
+        prepend references = @./geometries.usd@</Geometries/Spacer_4cm>
+    )
+    {
+        over "Spacer_4cm" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer_4cm1_rBr2R" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer_4cm1_rBr2R>
+    )
+    {
+        over "tn__Spacer_4cm1_rBr2R" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer_4cm1_rBr2R/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer_4cm1_rBr2R_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer_4cm1_rBr2R>
+    )
+    {
+        over "tn__Spacer_4cm1_rBr2R" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer_4cm2_rBr2R" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer_4cm2_rBr2R>
+    )
+    {
+        over "tn__Spacer_4cm2_rBr2R" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer_4cm2_rBr2R/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer_4cm2_rBr2R_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer_4cm2_rBr2R>
+    )
+    {
+        over "tn__Spacer_4cm2_rBr2R" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer_4cm3_rBr2R" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer_4cm3_rBr2R>
+    )
+    {
+        over "tn__Spacer_4cm3_rBr2R" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer_4cm3_rBr2R/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer_4cm3_rBr2R_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer_4cm3_rBr2R>
+    )
+    {
+        over "tn__Spacer_4cm3_rBr2R" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Spacer_2cm" (
+        prepend references = @./geometries.usd@</Geometries/Spacer_2cm>
+    )
+    {
+        over "Spacer_2cm" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Spacer_2cm/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Spacer_2cm_1" (
+        prepend references = @./geometries.usd@</Geometries/Spacer_2cm>
+    )
+    {
+        over "Spacer_2cm" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer_2cm1_rBr2R" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer_2cm1_rBr2R>
+    )
+    {
+        over "tn__Spacer_2cm1_rBr2R" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer_2cm1_rBr2R/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer_2cm1_rBr2R_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer_2cm1_rBr2R>
+    )
+    {
+        over "tn__Spacer_2cm1_rBr2R" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer_2cm2_rBr2R" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer_2cm2_rBr2R>
+    )
+    {
+        over "tn__Spacer_2cm2_rBr2R" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer_2cm2_rBr2R/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer_2cm2_rBr2R_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer_2cm2_rBr2R>
+    )
+    {
+        over "tn__Spacer_2cm2_rBr2R" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer_2cm3_rBr2R" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer_2cm3_rBr2R>
+    )
+    {
+        over "tn__Spacer_2cm3_rBr2R" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer_2cm3_rBr2R/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer_2cm3_rBr2R_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer_2cm3_rBr2R>
+    )
+    {
+        over "tn__Spacer_2cm3_rBr2R" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer_30mm1_tCV3T" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer_30mm1_tCV3T>
+    )
+    {
+        over "tn__Spacer_30mm1_tCV3T" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer_30mm1_tCV3T/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer_30mm1_tCV3T_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer_30mm1_tCV3T>
+    )
+    {
+        over "tn__Spacer_30mm1_tCV3T" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer_30mm2_tCV3T" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer_30mm2_tCV3T>
+    )
+    {
+        over "tn__Spacer_30mm2_tCV3T" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer_30mm2_tCV3T/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer_30mm2_tCV3T_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer_30mm2_tCV3T>
+    )
+    {
+        over "tn__Spacer_30mm2_tCV3T" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Spacer_30mm11_uDDl3FW0I" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer_30mm11_uDDl3FW0I>
+    )
+    {
+        over "tn__Spacer_30mm11_uDDl3FW0I" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Spacer_30mm11_uDDl3FW0I/VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Matriau_de_base__Mtal_jV0nj3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Spacer_30mm11_uDDl3FW0I_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Spacer_30mm11_uDDl3FW0I>
+    )
+    {
+        over "tn__Spacer_30mm11_uDDl3FW0I" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps38" (
+        prepend references = @./geometries.usd@</Geometries/Corps38>
+    )
+    {
+        over "Corps38" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps38/VisualMaterials/tn__ABS_noir_sAJ>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__ABS_noir_sAJ" (
+                prepend references = @./materials.usda@</Materials/tn__ABS_noir_sAJ>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps38_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps38>
+    )
+    {
+        over "Corps38" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps1" (
+        prepend references = @./geometries.usd@</Geometries/Corps1>
+    )
+    {
+        over "Corps1" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps1/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps1_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps1>
+    )
+    {
+        over "Corps1" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps11_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps11_aE>
+    )
+    {
+        over "tn__Corps11_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps11_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps11_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps11_aE>
+    )
+    {
+        over "tn__Corps11_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps2" (
+        prepend references = @./geometries.usd@</Geometries/Corps2>
+    )
+    {
+        over "Corps2" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps2/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps2_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps2>
+    )
+    {
+        over "Corps2" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps3" (
+        prepend references = @./geometries.usd@</Geometries/Corps3>
+    )
+    {
+        over "Corps3" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps3/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps3_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps3>
+    )
+    {
+        over "Corps3" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps4" (
+        prepend references = @./geometries.usd@</Geometries/Corps4>
+    )
+    {
+        over "Corps4" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps4/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps4_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps4>
+    )
+    {
+        over "Corps4" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps5" (
+        prepend references = @./geometries.usd@</Geometries/Corps5>
+    )
+    {
+        over "Corps5" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps5/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps5_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps5>
+    )
+    {
+        over "Corps5" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps6" (
+        prepend references = @./geometries.usd@</Geometries/Corps6>
+    )
+    {
+        over "Corps6" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps6/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps6_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps6>
+    )
+    {
+        over "Corps6" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps7" (
+        prepend references = @./geometries.usd@</Geometries/Corps7>
+    )
+    {
+        over "Corps7" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps7/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps7_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps7>
+    )
+    {
+        over "Corps7" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps8" (
+        prepend references = @./geometries.usd@</Geometries/Corps8>
+    )
+    {
+        over "Corps8" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps8/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps8_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps8>
+    )
+    {
+        over "Corps8" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps9" (
+        prepend references = @./geometries.usd@</Geometries/Corps9>
+    )
+    {
+        over "Corps9" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps9/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps9_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps9>
+    )
+    {
+        over "Corps9" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps10" (
+        prepend references = @./geometries.usd@</Geometries/Corps10>
+    )
+    {
+        over "Corps10" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps10/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps10_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps10>
+    )
+    {
+        over "Corps10" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps11" (
+        prepend references = @./geometries.usd@</Geometries/Corps11>
+    )
+    {
+        over "Corps11" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps11/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps11_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps11>
+    )
+    {
+        over "Corps11" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps12" (
+        prepend references = @./geometries.usd@</Geometries/Corps12>
+    )
+    {
+        over "Corps12" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps12/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps12_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps12>
+    )
+    {
+        over "Corps12" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps12_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps12_aE>
+    )
+    {
+        over "tn__Corps12_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps12_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps12_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps12_aE>
+    )
+    {
+        over "tn__Corps12_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps21_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps21_aE>
+    )
+    {
+        over "tn__Corps21_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps21_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps21_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps21_aE>
+    )
+    {
+        over "tn__Corps21_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps31_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps31_aE>
+    )
+    {
+        over "tn__Corps31_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps31_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps31_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps31_aE>
+    )
+    {
+        over "tn__Corps31_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps41_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps41_aE>
+    )
+    {
+        over "tn__Corps41_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps41_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps41_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps41_aE>
+    )
+    {
+        over "tn__Corps41_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps51_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps51_aE>
+    )
+    {
+        over "tn__Corps51_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps51_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps51_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps51_aE>
+    )
+    {
+        over "tn__Corps51_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps61_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps61_aE>
+    )
+    {
+        over "tn__Corps61_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps61_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps61_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps61_aE>
+    )
+    {
+        over "tn__Corps61_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps71_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps71_aE>
+    )
+    {
+        over "tn__Corps71_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps71_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps71_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps71_aE>
+    )
+    {
+        over "tn__Corps71_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps81_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps81_aE>
+    )
+    {
+        over "tn__Corps81_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps81_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps81_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps81_aE>
+    )
+    {
+        over "tn__Corps81_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps91_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps91_aE>
+    )
+    {
+        over "tn__Corps91_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps91_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps91_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps91_aE>
+    )
+    {
+        over "tn__Corps91_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps101_XG" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps101_XG>
+    )
+    {
+        over "tn__Corps101_XG" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps101_XG/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps101_XG_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps101_XG>
+    )
+    {
+        over "tn__Corps101_XG" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps111_XG" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps111_XG>
+    )
+    {
+        over "tn__Corps111_XG" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps111_XG/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps111_XG_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps111_XG>
+    )
+    {
+        over "tn__Corps111_XG" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps121_XG" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps121_XG>
+    )
+    {
+        over "tn__Corps121_XG" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps121_XG/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps121_XG_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps121_XG>
+    )
+    {
+        over "tn__Corps121_XG" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps13_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps13_aE>
+    )
+    {
+        over "tn__Corps13_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps13_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps13_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps13_aE>
+    )
+    {
+        over "tn__Corps13_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps22_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps22_aE>
+    )
+    {
+        over "tn__Corps22_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps22_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps22_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps22_aE>
+    )
+    {
+        over "tn__Corps22_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps32_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps32_aE>
+    )
+    {
+        over "tn__Corps32_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps32_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps32_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps32_aE>
+    )
+    {
+        over "tn__Corps32_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps42_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps42_aE>
+    )
+    {
+        over "tn__Corps42_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps42_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps42_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps42_aE>
+    )
+    {
+        over "tn__Corps42_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps52_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps52_aE>
+    )
+    {
+        over "tn__Corps52_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps52_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps52_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps52_aE>
+    )
+    {
+        over "tn__Corps52_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps62_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps62_aE>
+    )
+    {
+        over "tn__Corps62_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps62_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps62_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps62_aE>
+    )
+    {
+        over "tn__Corps62_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps72_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps72_aE>
+    )
+    {
+        over "tn__Corps72_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps72_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps72_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps72_aE>
+    )
+    {
+        over "tn__Corps72_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps82_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps82_aE>
+    )
+    {
+        over "tn__Corps82_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps82_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps82_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps82_aE>
+    )
+    {
+        over "tn__Corps82_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps92_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps92_aE>
+    )
+    {
+        over "tn__Corps92_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps92_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps92_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps92_aE>
+    )
+    {
+        over "tn__Corps92_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps102_XG" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps102_XG>
+    )
+    {
+        over "tn__Corps102_XG" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps102_XG/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps102_XG_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps102_XG>
+    )
+    {
+        over "tn__Corps102_XG" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps112_XG" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps112_XG>
+    )
+    {
+        over "tn__Corps112_XG" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps112_XG/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps112_XG_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps112_XG>
+    )
+    {
+        over "tn__Corps112_XG" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps122_XG" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps122_XG>
+    )
+    {
+        over "tn__Corps122_XG" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps122_XG/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps122_XG_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps122_XG>
+    )
+    {
+        over "tn__Corps122_XG" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps14_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps14_aE>
+    )
+    {
+        over "tn__Corps14_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps14_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps14_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps14_aE>
+    )
+    {
+        over "tn__Corps14_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps23_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps23_aE>
+    )
+    {
+        over "tn__Corps23_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps23_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps23_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps23_aE>
+    )
+    {
+        over "tn__Corps23_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps33_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps33_aE>
+    )
+    {
+        over "tn__Corps33_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps33_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps33_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps33_aE>
+    )
+    {
+        over "tn__Corps33_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps43_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps43_aE>
+    )
+    {
+        over "tn__Corps43_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps43_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps43_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps43_aE>
+    )
+    {
+        over "tn__Corps43_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps53_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps53_aE>
+    )
+    {
+        over "tn__Corps53_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps53_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps53_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps53_aE>
+    )
+    {
+        over "tn__Corps53_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps63_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps63_aE>
+    )
+    {
+        over "tn__Corps63_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps63_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps63_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps63_aE>
+    )
+    {
+        over "tn__Corps63_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps73_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps73_aE>
+    )
+    {
+        over "tn__Corps73_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps73_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps73_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps73_aE>
+    )
+    {
+        over "tn__Corps73_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps83_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps83_aE>
+    )
+    {
+        over "tn__Corps83_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps83_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps83_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps83_aE>
+    )
+    {
+        over "tn__Corps83_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps93_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps93_aE>
+    )
+    {
+        over "tn__Corps93_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps93_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps93_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps93_aE>
+    )
+    {
+        over "tn__Corps93_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps103_XG" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps103_XG>
+    )
+    {
+        over "tn__Corps103_XG" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps103_XG/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps103_XG_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps103_XG>
+    )
+    {
+        over "tn__Corps103_XG" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps113_XG" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps113_XG>
+    )
+    {
+        over "tn__Corps113_XG" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps113_XG/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps113_XG_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps113_XG>
+    )
+    {
+        over "tn__Corps113_XG" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps123_XG" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps123_XG>
+    )
+    {
+        over "tn__Corps123_XG" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps123_XG/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps123_XG_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps123_XG>
+    )
+    {
+        over "tn__Corps123_XG" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps15_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps15_aE>
+    )
+    {
+        over "tn__Corps15_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps15_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps15_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps15_aE>
+    )
+    {
+        over "tn__Corps15_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps24_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps24_aE>
+    )
+    {
+        over "tn__Corps24_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps24_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps24_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps24_aE>
+    )
+    {
+        over "tn__Corps24_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps34_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps34_aE>
+    )
+    {
+        over "tn__Corps34_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps34_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps34_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps34_aE>
+    )
+    {
+        over "tn__Corps34_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps44_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps44_aE>
+    )
+    {
+        over "tn__Corps44_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps44_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps44_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps44_aE>
+    )
+    {
+        over "tn__Corps44_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps54_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps54_aE>
+    )
+    {
+        over "tn__Corps54_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps54_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps54_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps54_aE>
+    )
+    {
+        over "tn__Corps54_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps64_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps64_aE>
+    )
+    {
+        over "tn__Corps64_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps64_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps64_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps64_aE>
+    )
+    {
+        over "tn__Corps64_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps16_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps16_aE>
+    )
+    {
+        over "tn__Corps16_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps16_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps16_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps16_aE>
+    )
+    {
+        over "tn__Corps16_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps17_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps17_aE>
+    )
+    {
+        over "tn__Corps17_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps17_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps17_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps17_aE>
+    )
+    {
+        over "tn__Corps17_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps18_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps18_aE>
+    )
+    {
+        over "tn__Corps18_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps18_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps18_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps18_aE>
+    )
+    {
+        over "tn__Corps18_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps19_aE" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps19_aE>
+    )
+    {
+        over "tn__Corps19_aE" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps19_aE/VisualMaterials/tn__Acier__Satin_1_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_1_zKjY2" (
+                prepend references = @./materials.usda@</Materials/tn__Acier__Satin_1_zKjY2>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps19_aE_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps19_aE>
+    )
+    {
+        over "tn__Corps19_aE" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps1_1_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps1_1>
+    )
+    {
+        over "Corps1_1" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps1_1_1/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps1_1_2" (
+        prepend references = @./geometries.usd@</Geometries/Corps1_1>
+    )
+    {
+        over "Corps1_1" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps2_1_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps2_1>
+    )
+    {
+        over "Corps2_1" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps2_1_1/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps2_1_2" (
+        prepend references = @./geometries.usd@</Geometries/Corps2_1>
+    )
+    {
+        over "Corps2_1" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps3_1_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps3_1>
+    )
+    {
+        over "Corps3_1" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps3_1_1/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps3_1_2" (
+        prepend references = @./geometries.usd@</Geometries/Corps3_1>
+    )
+    {
+        over "Corps3_1" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps4_1_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps4_1>
+    )
+    {
+        over "Corps4_1" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps4_1_1/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps4_1_2" (
+        prepend references = @./geometries.usd@</Geometries/Corps4_1>
+    )
+    {
+        over "Corps4_1" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps5_1_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps5_1>
+    )
+    {
+        over "Corps5_1" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps5_1_1/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps5_1_2" (
+        prepend references = @./geometries.usd@</Geometries/Corps5_1>
+    )
+    {
+        over "Corps5_1" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps6_1_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps6_1>
+    )
+    {
+        over "Corps6_1" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps6_1_1/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps6_1_2" (
+        prepend references = @./geometries.usd@</Geometries/Corps6_1>
+    )
+    {
+        over "Corps6_1" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps7_1_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps7_1>
+    )
+    {
+        over "Corps7_1" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps7_1_1/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps7_1_2" (
+        prepend references = @./geometries.usd@</Geometries/Corps7_1>
+    )
+    {
+        over "Corps7_1" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps8_1_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps8_1>
+    )
+    {
+        over "Corps8_1" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps8_1_1/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps8_1_2" (
+        prepend references = @./geometries.usd@</Geometries/Corps8_1>
+    )
+    {
+        over "Corps8_1" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps9_1_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps9_1>
+    )
+    {
+        over "Corps9_1" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps9_1_1/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps9_1_2" (
+        prepend references = @./geometries.usd@</Geometries/Corps9_1>
+    )
+    {
+        over "Corps9_1" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps10_1_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps10_1>
+    )
+    {
+        over "Corps10_1" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps10_1_1/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps10_1_2" (
+        prepend references = @./geometries.usd@</Geometries/Corps10_1>
+    )
+    {
+        over "Corps10_1" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps11_1_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps11_1>
+    )
+    {
+        over "Corps11_1" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps11_1_1/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps11_1_2" (
+        prepend references = @./geometries.usd@</Geometries/Corps11_1>
+    )
+    {
+        over "Corps11_1" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps12_1_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps12_1>
+    )
+    {
+        over "Corps12_1" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps12_1_1/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps12_1_2" (
+        prepend references = @./geometries.usd@</Geometries/Corps12_1>
+    )
+    {
+        over "Corps12_1" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps13" (
+        prepend references = @./geometries.usd@</Geometries/Corps13>
+    )
+    {
+        over "Corps13" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps13/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps13_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps13>
+    )
+    {
+        over "Corps13" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps14" (
+        prepend references = @./geometries.usd@</Geometries/Corps14>
+    )
+    {
+        over "Corps14" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps14/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps14_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps14>
+    )
+    {
+        over "Corps14" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps15" (
+        prepend references = @./geometries.usd@</Geometries/Corps15>
+    )
+    {
+        over "Corps15" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps15/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps15_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps15>
+    )
+    {
+        over "Corps15" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps16" (
+        prepend references = @./geometries.usd@</Geometries/Corps16>
+    )
+    {
+        over "Corps16" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps16/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps16_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps16>
+    )
+    {
+        over "Corps16" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps17" (
+        prepend references = @./geometries.usd@</Geometries/Corps17>
+    )
+    {
+        over "Corps17" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps17/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps17_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps17>
+    )
+    {
+        over "Corps17" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps18" (
+        prepend references = @./geometries.usd@</Geometries/Corps18>
+    )
+    {
+        over "Corps18" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps18/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps18_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps18>
+    )
+    {
+        over "Corps18" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps19" (
+        prepend references = @./geometries.usd@</Geometries/Corps19>
+    )
+    {
+        over "Corps19" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps19/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps19_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps19>
+    )
+    {
+        over "Corps19" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps20" (
+        prepend references = @./geometries.usd@</Geometries/Corps20>
+    )
+    {
+        over "Corps20" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps20/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps20_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps20>
+    )
+    {
+        over "Corps20" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps21" (
+        prepend references = @./geometries.usd@</Geometries/Corps21>
+    )
+    {
+        over "Corps21" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps21/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps21_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps21>
+    )
+    {
+        over "Corps21" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps22" (
+        prepend references = @./geometries.usd@</Geometries/Corps22>
+    )
+    {
+        over "Corps22" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps22/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps22_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps22>
+    )
+    {
+        over "Corps22" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps23" (
+        prepend references = @./geometries.usd@</Geometries/Corps23>
+    )
+    {
+        over "Corps23" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps23/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps23_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps23>
+    )
+    {
+        over "Corps23" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps24" (
+        prepend references = @./geometries.usd@</Geometries/Corps24>
+    )
+    {
+        over "Corps24" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps24/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps24_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps24>
+    )
+    {
+        over "Corps24" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps25" (
+        prepend references = @./geometries.usd@</Geometries/Corps25>
+    )
+    {
+        over "Corps25" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps25/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps25_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps25>
+    )
+    {
+        over "Corps25" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps26" (
+        prepend references = @./geometries.usd@</Geometries/Corps26>
+    )
+    {
+        over "Corps26" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps26/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps26_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps26>
+    )
+    {
+        over "Corps26" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps27" (
+        prepend references = @./geometries.usd@</Geometries/Corps27>
+    )
+    {
+        over "Corps27" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps27/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps27_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps27>
+    )
+    {
+        over "Corps27" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps28" (
+        prepend references = @./geometries.usd@</Geometries/Corps28>
+    )
+    {
+        over "Corps28" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps28/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps28_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps28>
+    )
+    {
+        over "Corps28" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps11_aE_1_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps11_aE_1>
+    )
+    {
+        over "tn__Corps11_aE_1" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps11_aE_1_1/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps11_aE_1_2" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps11_aE_1>
+    )
+    {
+        over "tn__Corps11_aE_1" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps12_aE_1_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps12_aE_1>
+    )
+    {
+        over "tn__Corps12_aE_1" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps12_aE_1_1/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps12_aE_1_2" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps12_aE_1>
+    )
+    {
+        over "tn__Corps12_aE_1" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps13_aE_1_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps13_aE_1>
+    )
+    {
+        over "tn__Corps13_aE_1" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps13_aE_1_1/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps13_aE_1_2" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps13_aE_1>
+    )
+    {
+        over "tn__Corps13_aE_1" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps14_aE_1_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps14_aE_1>
+    )
+    {
+        over "tn__Corps14_aE_1" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps14_aE_1_1/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps14_aE_1_2" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps14_aE_1>
+    )
+    {
+        over "tn__Corps14_aE_1" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps21_aE_1_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps21_aE_1>
+    )
+    {
+        over "tn__Corps21_aE_1" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps21_aE_1_1/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps21_aE_1_2" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps21_aE_1>
+    )
+    {
+        over "tn__Corps21_aE_1" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps15_aE_1_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps15_aE_1>
+    )
+    {
+        over "tn__Corps15_aE_1" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps15_aE_1_1/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps15_aE_1_2" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps15_aE_1>
+    )
+    {
+        over "tn__Corps15_aE_1" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps16_aE_1_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps16_aE_1>
+    )
+    {
+        over "tn__Corps16_aE_1" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps16_aE_1_1/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps16_aE_1_2" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps16_aE_1>
+    )
+    {
+        over "tn__Corps16_aE_1" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps17_aE_1_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps17_aE_1>
+    )
+    {
+        over "tn__Corps17_aE_1" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps17_aE_1_1/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps17_aE_1_2" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps17_aE_1>
+    )
+    {
+        over "tn__Corps17_aE_1" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps18_aE_1_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps18_aE_1>
+    )
+    {
+        over "tn__Corps18_aE_1" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps18_aE_1_1/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps18_aE_1_2" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps18_aE_1>
+    )
+    {
+        over "tn__Corps18_aE_1" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps19_aE_1_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps19_aE_1>
+    )
+    {
+        over "tn__Corps19_aE_1" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps19_aE_1_1/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps19_aE_1_2" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps19_aE_1>
+    )
+    {
+        over "tn__Corps19_aE_1" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps110_WG" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps110_WG>
+    )
+    {
+        over "tn__Corps110_WG" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps110_WG/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps110_WG_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps110_WG>
+    )
+    {
+        over "tn__Corps110_WG" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps111_WG" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps111_WG>
+    )
+    {
+        over "tn__Corps111_WG" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps111_WG/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps111_WG_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps111_WG>
+    )
+    {
+        over "tn__Corps111_WG" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps112_WG" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps112_WG>
+    )
+    {
+        over "tn__Corps112_WG" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps112_WG/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps112_WG_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps112_WG>
+    )
+    {
+        over "tn__Corps112_WG" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps113_WG" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps113_WG>
+    )
+    {
+        over "tn__Corps113_WG" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps113_WG/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps113_WG_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps113_WG>
+    )
+    {
+        over "tn__Corps113_WG" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps114_WG" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps114_WG>
+    )
+    {
+        over "tn__Corps114_WG" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps114_WG/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps114_WG_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps114_WG>
+    )
+    {
+        over "tn__Corps114_WG" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps115_WG" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps115_WG>
+    )
+    {
+        over "tn__Corps115_WG" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps115_WG/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps115_WG_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps115_WG>
+    )
+    {
+        over "tn__Corps115_WG" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps116_WG" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps116_WG>
+    )
+    {
+        over "tn__Corps116_WG" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps116_WG/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps116_WG_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps116_WG>
+    )
+    {
+        over "tn__Corps116_WG" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps22_aE_1_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps22_aE_1>
+    )
+    {
+        over "tn__Corps22_aE_1" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps22_aE_1_1/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Acier__Satin_XIfr1>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps22_aE_1_2" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps22_aE_1>
+    )
+    {
+        over "tn__Corps22_aE_1" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "tn__Corps117_WG" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps117_WG>
+    )
+    {
+        over "tn__Corps117_WG" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/tn__Corps117_WG/VisualMaterials/tn__Acier__Satin_2_zKjY2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Acier__Satin_2_zKjY2" (
+                prepend references = @./materials.usda@</Materials/tn__Acier__Satin_1_zKjY2>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "tn__Corps117_WG_1" (
+        prepend references = @./geometries.usd@</Geometries/tn__Corps117_WG>
+    )
+    {
+        over "tn__Corps117_WG" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "motor1_link_visual" (
+        prepend references = @./geometries.usd@</Geometries/motor1_link_visual>
+    )
+    {
+        over "motor1_link_visual" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/motor1_link_visual/VisualMaterials/tn__Matriau_de_base__Mtal_1_gY0rv3K>
+            custom string urdf:name = "motor1_link_visual"
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_1_gY0rv3K" (
+                prepend references = @./materials.usda@</Materials/tn__Matriau_de_base__Mtal_1_gY0rv3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "motor1_link_visual_1" (
+        prepend references = @./geometries.usd@</Geometries/motor1_link_visual>
+    )
+    {
+        over "motor1_link_visual" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+            token purpose = "guide"
+        }
+    }
+
+    def Xform "motor1_link_visual_2" (
+        prepend references = @./geometries.usd@</Geometries/motor1_link_visual>
+    )
+    {
+        over "motor1_link_visual" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/motor1_link_visual_2/VisualMaterials/tn__Matriau_de_base__Mtal_1_gY0rv3K>
+            custom string urdf:name = "motor2_link_visual"
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_1_gY0rv3K" (
+                prepend references = @./materials.usda@</Materials/tn__Matriau_de_base__Mtal_1_gY0rv3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "motor1_link_visual_3" (
+        prepend references = @./geometries.usd@</Geometries/motor1_link_visual>
+    )
+    {
+        over "motor1_link_visual" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/motor1_link_visual_3/VisualMaterials/tn__Matriau_de_base__Mtal_1_gY0rv3K>
+            custom string urdf:name = "motor3_link_visual"
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_1_gY0rv3K" (
+                prepend references = @./materials.usda@</Materials/tn__Matriau_de_base__Mtal_1_gY0rv3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "motor1_link_visual_4" (
+        prepend references = @./geometries.usd@</Geometries/motor1_link_visual>
+    )
+    {
+        over "motor1_link_visual" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/motor1_link_visual_4/VisualMaterials/tn__Matriau_de_base__Mtal_1_gY0rv3K>
+            custom string urdf:name = "motor4_link_visual"
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Matriau_de_base__Mtal_1_gY0rv3K" (
+                prepend references = @./materials.usda@</Materials/tn__Matriau_de_base__Mtal_1_gY0rv3K>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps1_2" (
+        prepend references = @./geometries.usd@</Geometries/Corps1_2>
+    )
+    {
+        over "Corps1_2" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps1_2/VisualMaterials/tn__Plastique__Mat_noir_ePf0a2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Plastique__Mat_noir_ePf0a2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Fibre_de_carbone__Tresse_vZ0jX4>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps1_2_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps1_2>
+    )
+    {
+        over "Corps1_2" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps2_2" (
+        prepend references = @./geometries.usd@</Geometries/Corps2_2>
+    )
+    {
+        over "Corps2_2" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps2_2/VisualMaterials/tn__Plastique__Mat_noir_ePf0a2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Plastique__Mat_noir_ePf0a2" (
+                prepend references = @./materials.usda@</Materials/tn__Plastique__Mat_noir_ePf0a2>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps2_2_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps2_2>
+    )
+    {
+        over "Corps2_2" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps1_3" (
+        prepend references = @./geometries.usd@</Geometries/Corps1_3>
+    )
+    {
+        over "Corps1_3" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps1_3/VisualMaterials/tn__Plastique__Mat_noir_1_wRh0i2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Plastique__Mat_noir_1_wRh0i2" (
+                prepend references = @./visual_materials.usda@</VisualMaterials/tn__Fibre_de_carbone__Tresse_vZ0jX4>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps1_3_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps1_3>
+    )
+    {
+        over "Corps1_3" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+
+    def Xform "Corps2_3" (
+        prepend references = @./geometries.usd@</Geometries/Corps2_3>
+    )
+    {
+        over "Corps2_3" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/Corps2_3/VisualMaterials/tn__Plastique__Mat_noir_1_wRh0i2>
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "tn__Plastique__Mat_noir_1_wRh0i2" (
+                prepend references = @./materials.usda@</Materials/tn__Plastique__Mat_noir_ePf0a2>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "Corps2_3_1" (
+        prepend references = @./geometries.usd@</Geometries/Corps2_3>
+    )
+    {
+        over "Corps2_3" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            token physics:approximation = "convexHull"
+        }
+    }
+}
+

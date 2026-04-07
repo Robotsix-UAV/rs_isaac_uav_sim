@@ -1,0 +1,20 @@
+{
+  "include": [
+    "rs_isaac_uav_sim"
+  ],
+  "exclude": [
+    "**/__pycache__",
+    "build",
+    "install",
+    "log"
+  ],
+  "extraPaths": [
+    "/opt/ros/jazzy/lib/python3.12/site-packages",
+    "/home/robotsix-docker/.venv/lib/python3.12/site-packages"
+  ],
+  "pythonVersion": "3.12",
+  "pythonPlatform": "Linux",
+  "typeCheckingMode": "basic",
+  "reportMissingImports": "warning",
+  "reportMissingModuleSource": "warning"
+}
