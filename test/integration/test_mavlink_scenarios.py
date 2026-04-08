@@ -208,7 +208,11 @@ class TestMavlinkScenarios(unittest.TestCase):
         autopilot.arm()
         autopilot.set_controls([_CTRL_LIFTOFF] * 4)
 
-        time.sleep(2.0)
+        # Open-loop hover thrust over 2 s would let attitude perturbations
+        # accumulate enough horizontal drift to clip the |vx|/|vy| < 50 cm/s
+        # sanity bounds below. 1.0 s is plenty for vz to clear the -30 cm/s
+        # threshold (≈-150 cm/s expected at 0.15 g) while keeping drift small.
+        time.sleep(1.0)
 
         state = autopilot.get_hil_state()
         self.assertIsNotNone(state, 'No HIL_STATE_QUATERNION after liftoff command')

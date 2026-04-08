@@ -18,7 +18,7 @@
 import collections
 import math
 import os
-from typing import Optional
+from typing import Any, Optional
 
 from ament_index_python.packages import get_package_share_directory
 from isaacsim.core.api import SimulationContext
@@ -136,7 +136,7 @@ class DroneSimManager:
         # frame has PhysicsRigidBodyAPI and returns reliable physics buffer data,
         # unlike the articulation root base_link)
         self._frame_view = None
-        self._torch = None
+        self._torch: Any = None
         self._device = 'cuda'
 
         # GPS divider: send GPS at ~50 Hz
@@ -345,7 +345,11 @@ class DroneSimManager:
         torques_world = np.zeros((self.num_drones, 3))
 
         self._gps_counter += 1
-        send_gps = (self._gps_counter % self._gps_divider) == 0
+        # Send GPS on the very first step so HIL_STATE_QUATERNION has valid
+        # WGS84 lat/lon/alt before any consumer reads ground truth, then at
+        # the configured 50 Hz rate.
+        send_gps = (self._gps_counter == 1
+                    or (self._gps_counter % self._gps_divider) == 0)
 
         for i in range(self.num_drones):
             state = self.states[i]

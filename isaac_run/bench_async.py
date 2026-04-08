@@ -41,7 +41,6 @@ simulation_app = SimulationApp({
 
 import carb  # noqa: E402, I100
 import numpy as np  # noqa: E402
-import torch  # noqa: E402
 from pxr import Sdf, UsdLux  # noqa: E402, I100
 
 from isaacsim.core.api.objects import GroundPlane  # noqa: E402, I100

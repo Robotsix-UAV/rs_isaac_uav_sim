@@ -85,10 +85,10 @@ class PX4MavlinkHIL:
         self._current_utime = 0
 
         # Actuator message timing
-        self._last_actuator_wall_time = None
-        self._last_actuator_interval_ms = None
-        self._last_actuator_time_usec = None
-        self._last_actuator_simdt_us = None
+        self._last_actuator_wall_time: float | None = None
+        self._last_actuator_interval_ms: float | None = None
+        self._last_actuator_time_usec: int | None = None
+        self._last_actuator_simdt_us: int | None = None
 
         # Last raw actuator message content
         self._raw_controls = np.zeros(self._num_rotors)
@@ -231,7 +231,7 @@ class PX4MavlinkHIL:
         while time.monotonic() < deadline:
             if self._connection is None:
                 return False
-            msg = self._connection.recv_match(blocking=True, timeout=0.5)
+            msg = self._connection.recv_match(blocking=True, timeout=0.5)  # type: ignore[call-arg]
             if msg is not None and msg.get_type() == 'HEARTBEAT':
                 self._received_first_heartbeat = True
                 print(f'[MAVLink] Vehicle {self._vehicle_id}: received first heartbeat')
@@ -338,13 +338,14 @@ class PX4MavlinkHIL:
                     time.time() - self._last_actuator_wall_time
                 ) * 1000.0
             self._last_actuator_wall_time = time.time()
+            msg_time_usec: int = msg.time_usec  # type: ignore[assignment]
             if self._last_actuator_time_usec is not None:
-                self._last_actuator_simdt_us = msg.time_usec - self._last_actuator_time_usec
-            self._last_actuator_time_usec = msg.time_usec
+                self._last_actuator_simdt_us = msg_time_usec - self._last_actuator_time_usec
+            self._last_actuator_time_usec = msg_time_usec
             self._t_actuator_recv_for_debug = now_mono
 
             # Apply control
-            self._apply_control(list(msg.controls), msg.mode)
+            self._apply_control(list(msg.controls), msg.mode)  # type: ignore[arg-type]
             self._received_first_actuator = True
 
         # --- Periodic timing debug output (every 2 s) ---

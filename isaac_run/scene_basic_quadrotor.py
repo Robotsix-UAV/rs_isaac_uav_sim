@@ -16,9 +16,8 @@
 
 import os
 
-import carb
-
 from ament_index_python.packages import get_package_share_directory
+import carb
 from isaacsim import SimulationApp
 from isaacsim.core.api.objects import GroundPlane
 from isaacsim.core.api.world import World

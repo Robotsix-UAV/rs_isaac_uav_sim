@@ -42,7 +42,6 @@ sys.argv = [sys.argv[0]] + _unknown
 # 1. Initialise SimulationApp — MUST be first Omniverse call
 # ---------------------------------------------------------------------------
 from isaacsim import SimulationApp  # noqa: E402
-import carb  # noqa: E402
 
 _extra_args = (
     [] if args.headless else [
@@ -58,6 +57,9 @@ simulation_app = SimulationApp({
     'scene_graph_instancing': True,
     'extra_args': _extra_args,
 })
+
+import carb  # noqa: E402, I100
+
 _s = carb.settings.get_settings()
 
 # Lower render quality to improve frame-rate performance

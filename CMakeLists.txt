@@ -39,6 +39,12 @@ endif()
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
+  # This is a Python-only package; pretend the C/C++ linters are
+  # already handled so ament_lint_auto doesn't add cppcheck/cpplint/
+  # uncrustify tests that fail with "No files found".
+  set(ament_cmake_cppcheck_FOUND TRUE)
+  set(ament_cmake_cpplint_FOUND TRUE)
+  set(ament_cmake_uncrustify_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 
   find_package(ament_cmake_pytest REQUIRED)
