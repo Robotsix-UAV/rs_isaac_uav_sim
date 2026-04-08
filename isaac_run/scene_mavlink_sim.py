@@ -41,8 +41,8 @@ sys.argv = [sys.argv[0]] + _unknown
 # ---------------------------------------------------------------------------
 # 1. Initialise SimulationApp — MUST be first Omniverse call
 # ---------------------------------------------------------------------------
-import carb  # noqa: E402
 from isaacsim import SimulationApp  # noqa: E402
+import carb  # noqa: E402
 
 _extra_args = (
     [] if args.headless else [
