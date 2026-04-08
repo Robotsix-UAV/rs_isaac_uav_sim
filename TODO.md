@@ -8,10 +8,10 @@
 
 ### Major
 
-- [ ] **[M1] Hardcoded absolute asset paths**
+- [x] **[M1] Hardcoded absolute asset paths**
   - `vehicle.py:16–18`, `scene_basic_quadrotor.py:22`
   - Paths are pinned to `/home/robotsix-docker/...` — breaks on any other machine or container.
-  - Fix: derive path dynamically via `pathlib.Path(__file__).resolve()` relative to package root.
+  - Fixed: assets are now installed to `share/rs_isaac_uav_sim/assets/` and resolved via `ament_index_python.get_package_share_directory`.
 
 - [ ] **[M2] Invalid `SimulationApp` config keys silently discarded**
   - `scene_mavlink_sim.py:27–32`

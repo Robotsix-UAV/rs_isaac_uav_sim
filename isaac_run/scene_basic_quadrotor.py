@@ -14,8 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
+
 import carb
 
+from ament_index_python.packages import get_package_share_directory
 from isaacsim import SimulationApp
 from isaacsim.core.api.objects import GroundPlane
 from isaacsim.core.api.world import World
@@ -24,9 +27,9 @@ import numpy as np
 from omni.physx import get_physx_visualization_interface
 from pxr import Gf, UsdGeom, UsdLux
 
-DRONE_USD = (
-    '/home/robotsix-docker/LS2N/ros2_ws/src/rs_isaac_uav_sim/assets/'
-    'basic_quadrotor/basic_quadrotor.usda'
+DRONE_USD = os.path.join(
+    get_package_share_directory('rs_isaac_uav_sim'),
+    'assets', 'basic_quadrotor', 'basic_quadrotor.usda',
 )
 DRONE_PRIM_PATH = '/World/basic_quadrotor'
 

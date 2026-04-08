@@ -20,6 +20,10 @@ install(DIRECTORY config/
   DESTINATION share/${PROJECT_NAME}/config
 )
 
+install(DIRECTORY assets/
+  DESTINATION share/${PROJECT_NAME}/assets
+)
+
 if(DEFINED ENV{ISAAC_SIM_PYTHON})
   message(STATUS "[rs_isaac_uav_sim] Installing into Isaac Sim Python: $ENV{ISAAC_SIM_PYTHON}")
   execute_process(

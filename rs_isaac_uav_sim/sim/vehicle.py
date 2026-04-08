@@ -17,8 +17,10 @@
 
 import collections
 import math
+import os
 from typing import Optional
 
+from ament_index_python.packages import get_package_share_directory
 from isaacsim.core.api import SimulationContext
 import numpy as np
 from scipy.spatial.transform import Rotation
@@ -35,9 +37,13 @@ from .sensors import (
 )
 from .state import VehicleState
 
-QUADROTOR_ASSET_PATH = (
-    '/home/robotsix-docker/LS2N/ros2_ws/src/rs_isaac_uav_sim/assets/'
-    'basic_quadrotor/basic_quadrotor.usda'
+# Resolve the package's installed assets directory at import time so the path
+# follows the colcon install layout instead of hard-coded developer paths.
+ASSETS_DIR = os.path.join(
+    get_package_share_directory('rs_isaac_uav_sim'), 'assets'
+)
+QUADROTOR_ASSET_PATH = os.path.join(
+    ASSETS_DIR, 'basic_quadrotor', 'basic_quadrotor.usda'
 )
 
 # Path suffix inside the USD asset from its defaultPrim to the articulation root prim.
@@ -220,11 +226,8 @@ class DroneSimManager:
         if positions is None:
             positions = self._grid_positions(self.num_drones)
 
-        _assets_dir = (
-            '/home/robotsix-docker/LS2N/ros2_ws/src/rs_isaac_uav_sim/assets/'
-        )
         if self.quad_params.usd_asset:
-            asset_path = _assets_dir + self.quad_params.usd_asset
+            asset_path = os.path.join(ASSETS_DIR, self.quad_params.usd_asset)
         else:
             asset_path = QUADROTOR_ASSET_PATH
 
