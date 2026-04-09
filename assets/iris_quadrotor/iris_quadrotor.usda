@@ -1,0 +1,84 @@
+#usda 1.0
+(
+    defaultPrim = "iris_quadrotor"
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+# Iris quadrotor asset — reuses basic_quadrotor geometry, overrides physics to
+# match the 3DR Iris SDF (iris.sdf.jinja) used by PX4 SITL airframe 10016.
+#
+# Total mass: 1.520 kg  (0.001 base_link + 1.495 frame + 4×0.005 motor + 4×0.001 blade)
+# Frame inertia: Ixx=Iyy=0.029125, Izz=0.055225 kg·m²  (from iris.sdf.jinja base_link)
+#
+# Note: overrides are placed as local opinions inside the def prim so they win
+# over the reference opinions coming from basic_quadrotor/payloads/base.usda.
+
+def Xform "iris_quadrotor" (
+    prepend references = @../basic_quadrotor/payloads/base.usda@
+)
+{
+    over "Geometry"
+    {
+        over "base_link"
+        {
+            float physics:mass = 0.001
+            float3 physics:diagonalInertia = (1e-6, 1e-6, 1e-6)
+
+            over "frame"
+            {
+                float physics:mass = 1.495
+                float3 physics:diagonalInertia = (0.029125, 0.029125, 0.055225)
+
+                over "motor1"
+                {
+                    float physics:mass = 0.005
+                    float3 physics:diagonalInertia = (1.0125e-5, 1.2563e-5, 6.2534e-5)
+
+                    over "blade1"
+                    {
+                        float physics:mass = 0.001
+                        float3 physics:diagonalInertia = (1e-6, 1e-6, 1e-6)
+                    }
+                }
+
+                over "motor2"
+                {
+                    float physics:mass = 0.005
+                    float3 physics:diagonalInertia = (1.0125e-5, 1.2563e-5, 6.2534e-5)
+
+                    over "blade2"
+                    {
+                        float physics:mass = 0.001
+                        float3 physics:diagonalInertia = (1e-6, 1e-6, 1e-6)
+                    }
+                }
+
+                over "motor3"
+                {
+                    float physics:mass = 0.005
+                    float3 physics:diagonalInertia = (1.0125e-5, 1.2563e-5, 6.2534e-5)
+
+                    over "blade3"
+                    {
+                        float physics:mass = 0.001
+                        float3 physics:diagonalInertia = (1e-6, 1e-6, 1e-6)
+                    }
+                }
+
+                over "motor4"
+                {
+                    float physics:mass = 0.005
+                    float3 physics:diagonalInertia = (1.0125e-5, 1.2563e-5, 6.2534e-5)
+
+                    over "blade4"
+                    {
+                        float physics:mass = 0.001
+                        float3 physics:diagonalInertia = (1e-6, 1e-6, 1e-6)
+                    }
+                }
+            }
+        }
+    }
+}

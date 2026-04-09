@@ -1,0 +1,48 @@
+#usda 1.0
+(
+    defaultPrim = "VisualMaterials"
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+# Standalone visual materials file - referenced by instances.usda to avoid circular deps.
+# (base.usda → instances.usda → base.usda would be circular)
+
+def Scope "VisualMaterials"
+{
+    # Carbon-fibre weave — used by BottomFrame / TopFrame instances
+    def Material "tn__Fibre_de_carbone__Tresse_vZ0jX4"
+    {
+        token outputs:surface.connect = </VisualMaterials/tn__Fibre_de_carbone__Tresse_vZ0jX4/PreviewSurface.outputs:surface>
+        def Shader "PreviewSurface"
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            color3f inputs:diffuseColor = (0.018, 0.018, 0.018)
+            float inputs:metallic = 0.0
+            float inputs:roughness = 0.4
+            token outputs:surface
+        }
+    }
+
+    # Base metal (gold-tinted) — used by structural screw/spacer parts
+    def Material "tn__Matriau_de_base__Mtal_jV0nj3K" (
+        prepend references = @./materials.usda@</Materials/tn__Matriau_de_base__Mtal_jV0nj3K>
+    )
+    {
+    }
+
+    # Satin steel — used by spacer/standoff parts
+    def Material "tn__Acier__Satin_XIfr1"
+    {
+        token outputs:surface.connect = </VisualMaterials/tn__Acier__Satin_XIfr1/PreviewSurface.outputs:surface>
+        def Shader "PreviewSurface"
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            color3f inputs:diffuseColor = (0.35, 0.35, 0.35)
+            float inputs:metallic = 0.8
+            float inputs:roughness = 0.25
+            token outputs:surface
+        }
+    }
+}

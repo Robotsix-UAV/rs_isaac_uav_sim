@@ -1,0 +1,126 @@
+# Copyright 2026 ROBOTSIX
+# Author: Damien SIX (damien@robotsix.net)
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Default simulation configuration for rs_isaac_uav_sim.
+# All values match the dataclass defaults in rs_isaac_uav_sim/sim/config.py.
+# Omit any key to keep the dataclass default.
+
+quadrotor:
+  # Total vehicle mass [kg]
+  mass: 1.0
+  # Diagonal inertia tensor [Ixx, Iyy, Izz] [kg·m²]
+  inertia: [0.0052, 0.0052, 0.0082]
+  # Rotor positions in FLU body frame [m].
+  # Each entry is [x, y, z].  Order: Motor1(+X), Motor2(+Y), Motor3(-X), Motor4(-Y)
+  rotor_positions:
+    - [0.17, 0.0, 0.002]    # Motor1: +X arm (front)
+    - [0.0, 0.17, 0.002]    # Motor2: +Y arm (left)
+    - [-0.17, 0.0, 0.002]   # Motor3: -X arm (rear)
+    - [0.0, -0.17, 0.002]   # Motor4: -Y arm (right)
+  # Thrust coefficient: T = ct * omega^2 [N/(rad/s)^2]
+  ct: 1.1e-05
+  # Torque coefficient: Q = cq * omega^2 [N·m/(rad/s)^2]
+  cq: 1.56e-07
+  # Rotation directions per rotor (-1=CCW, +1=CW viewed from above in FLU)
+  rot_dirs: [-1, 1, -1, 1]
+  # Minimum rotor speed [rad/s]
+  omega_min: 0.0
+  # Maximum rotor speed [rad/s]
+  omega_max: 1000.0
+  # Linear drag coefficients [dx, dy, dz] in body frame [kg/s].
+  # Applied as F_drag = -diag(drag) * v_body (force proportional to velocity).
+  drag: [0.0, 0.0, 0.0]
+
+  # PX4 THR_MDL_FAC: thrust model factor (0.0 = linear, 1.0 = quadratic).
+  # The iris airframe uses the default PX4 value of 0.0 (linear thrust curve).
+  thr_mdl_fac: 0.0
+
+sensor:
+  # --- Gyroscope ---
+  # Noise spectral density [rad/s/sqrt(Hz)]
+  gyro_noise_density: 3.393696e-04
+  # Random-walk coefficient [rad/s*sqrt(Hz)]
+  gyro_random_walk: 3.878509e-05
+  # Bias correlation time [s]
+  gyro_bias_correlation_time: 1000.0
+  # Turn-on bias standard deviation [rad/s]
+  gyro_turn_on_bias_sigma: 8.726646e-03
+
+  # --- Accelerometer ---
+  # Noise spectral density [m/s²/sqrt(Hz)]
+  accel_noise_density: 4.0e-03
+  # Random-walk coefficient [m/s²*sqrt(Hz)]
+  accel_random_walk: 6.0e-03
+  # Bias correlation time [s]
+  accel_bias_correlation_time: 300.0
+  # Turn-on bias standard deviation [m/s²]
+  accel_turn_on_bias_sigma: 0.196
+
+  # --- GPS ---
+  # Horizontal position random walk [(m/s)/sqrt(Hz)]
+  gps_xy_random_walk: 2.0
+  # Vertical position random walk [(m/s)/sqrt(Hz)]
+  gps_z_random_walk: 4.0
+  # Horizontal position noise density [m/sqrt(Hz)]
+  gps_xy_noise_density: 2.0e-4
+  # Vertical position noise density [m/sqrt(Hz)]
+  gps_z_noise_density: 4.0e-4
+  # Horizontal velocity noise density [(m/s)/sqrt(Hz)]
+  gps_vxy_noise_density: 0.2
+  # Vertical velocity noise density [(m/s)/sqrt(Hz)]
+  gps_vz_noise_density: 0.4
+  # GPS noise correlation time [s]
+  gps_correlation_time: 60.0
+
+  # --- Barometer ---
+  # Pressure drift rate [Pa/s]
+  baro_drift_pa_per_sec: 0.0
+
+  # --- Magnetometer ---
+  # Noise spectral density [gauss/sqrt(Hz)]
+  mag_noise_density: 4.0e-4
+  # Random-walk coefficient [gauss*sqrt(Hz)]
+  mag_random_walk: 6.4e-6
+  # Bias correlation time [s]
+  mag_bias_correlation_time: 600.0
+
+  # --- Mode selection ---
+  # true = use GPS, false = use visual odometry
+  use_gps: true
+
+  # --- Visual Odometry ---
+  visual_odometry:
+    # Position noise spectral density [m/sqrt(Hz)]
+    pos_noise_density: 0.005
+    # Position random-walk coefficient [m*sqrt(Hz)]
+    pos_random_walk: 0.001
+    # Position bias correlation time [s]
+    pos_correlation_time: 60.0
+    # Velocity noise spectral density [(m/s)/sqrt(Hz)]
+    vel_noise_density: 0.005
+    # Velocity random-walk coefficient [(m/s)*sqrt(Hz)]
+    vel_random_walk: 0.001
+    # Velocity bias correlation time [s]
+    vel_correlation_time: 10.0
+    # Attitude noise spectral density [rad/sqrt(Hz)]
+    att_noise_density: 0.0001
+
+gps_origin:
+  # Reference latitude [deg]  (default: Nantes, France)
+  lat: 47.24926
+  # Reference longitude [deg]
+  lon: -1.54844
+  # Reference altitude above MSL [m]
+  alt: 0.0

@@ -1,0 +1,50 @@
+# Minimal docker-compose for rs_isaac_uav_sim.
+#
+# Builds the package's self-contained image (ROS Jazzy + Isaac Sim 6.0 +
+# PX4 SITL + GL/Vulkan stack), bind-mounts the package source as the
+# colcon workspace, forwards X11 so a GUI window can open on the host
+# display, and exposes the host GPU via the NVIDIA Container Toolkit.
+#
+# Usage:
+#     xhost +local:           # one-time per X session, on the host
+#     docker compose up --build -d
+#     docker compose exec sim bash
+#         (then inside the container)
+#         colcon build
+#         source install/setup.bash
+#         python3 src/rs_isaac_uav_sim/scripts/live_flight_demo.py
+#
+# To run headless (no GUI), drop the X11 mounts and the DISPLAY env var.
+
+services:
+  sim:
+    build:
+      context: .
+      args:
+        ROS_DISTRO: ${ROS_DISTRO:-jazzy}
+    image: rs_isaac_uav_sim:latest
+    stdin_open: true
+    tty: true
+    # host network keeps PX4 SITL UDP MAVLink + Isaac Sim TCP HIL on
+    # the same loopback the rest of the stack expects.
+    network_mode: host
+    volumes:
+      # Mount the package as src/rs_isaac_uav_sim inside a colcon
+      # workspace at /workspace, so `colcon build` Just Works.
+      - .:/workspace/src/rs_isaac_uav_sim
+      # X11 forwarding for the GUI demo.
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    working_dir: /workspace
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - OMNI_KIT_ACCEPT_EULA=YES
+      - DISPLAY=${DISPLAY:-}
+      - XAUTHORITY=${XAUTHORITY:-}

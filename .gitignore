@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+*.so
+
+# Colcon build artifacts that get spilled into the source tree if you
+# run `colcon build` / `colcon test` from inside this directory by
+# mistake. Track only the AMENT_IGNORE markers so the in-tree ament
+# linters don't recurse into the artifacts on the next test run.
+/build/
+!/build/AMENT_IGNORE
+/install/
+!/install/AMENT_IGNORE
+/log/
+!/log/AMENT_IGNORE

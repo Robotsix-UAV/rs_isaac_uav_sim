@@ -1,0 +1,434 @@
+#usda 1.0
+(
+    defaultPrim = "basic_quadrotor"
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    subLayers = [
+        @./physics.usda@,
+    ]
+    upAxis = "Z"
+)
+
+def Xform "basic_quadrotor" (
+    prepend apiSchemas = ["GeomModelAPI"]
+    assetInfo = {
+        string name = "basic_quadrotor"
+    }
+    kind = "component"
+)
+{
+    # ---------- Materials ----------
+    def Scope "Materials"
+    {
+        def Material "black" (
+            prepend references = @./materials.usda@</Materials/black>
+        )
+        {
+        }
+
+        def Material "yellow" (
+            prepend references = @./materials.usda@</Materials/yellow>
+        )
+        {
+        }
+
+        def Material "blue" (
+            prepend references = @./materials.usda@</Materials/blue>
+        )
+        {
+        }
+
+        def Material "red" (
+            prepend references = @./materials.usda@</Materials/red>
+        )
+        {
+        }
+    }
+
+    # ---------- Geometry ----------
+    def Scope "Geometry"
+    {
+        # Virtual articulation root — massless structural anchor
+        def Xform "base_link"
+        {
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+            # ---------- Frame (consolidates all fixed structure) ----------
+            def Xform "frame"
+            {
+                quatf xformOp:orient = (1, 0, 0, 0)
+                float3 xformOp:scale = (1, 1, 1)
+                double3 xformOp:translate = (0, 0, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
+                # Bottom carbon-fibre plate (90° X rotation: Y-up CAD geometry → Z-up)
+                def Xform "frame_visual_bottom" (
+                    prepend references = @./instances.usda@</Instances/BottomFrame>
+                )
+                {
+                    float3 xformOp:rotateXYZ = (90, 0, 0)
+                    double3 xformOp:translate = (0, 0, 0)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+                }
+
+                # Top carbon-fibre plate (90° X rotation: Y-up CAD geometry → Z-up)
+                def Xform "frame_visual_top" (
+                    prepend references = @./instances.usda@</Instances/TopFrame>
+                )
+                {
+                    float3 xformOp:rotateXYZ = (90, 0, 0)
+                    double3 xformOp:translate = (0, 0, 0)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+                }
+
+                # Frame collision — convexHull of the bottom plate mesh
+                def Xform "frame_collision" (
+                    prepend references = @./instances.usda@</Instances/BottomFrame_1>
+                )
+                {
+                    float3 xformOp:rotateXYZ = (90, 0, 0)
+                    double3 xformOp:translate = (0, 0, 0)
+                    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+                }
+
+                # ---------- Motor 1 (+X arm) ----------
+                def Xform "motor1"
+                {
+                    double3 xformOp:translate = (0.17, 0, 0.002)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+
+                    def Xform "motor1_visual" (
+                        prepend references = @./instances.usda@</Instances/motor1_link_visual>
+                    )
+                    {
+                        quatd xformOp:orient = (0.7071054578, 0.7071080804, 0, 0)
+                        double3 xformOp:scale = (1, 1, 1)
+                        double3 xformOp:translate = (0, 0, 0)
+                        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+                    }
+
+                    def Cylinder "motor1_collision" (
+                        prepend apiSchemas = ["PhysicsCollisionAPI"]
+                    )
+                    {
+                        uniform token purpose = "guide"
+                        double height = 0.02
+                        double radius = 0.016
+                        double3 xformOp:translate = (0, 0, 0)
+                        uniform token[] xformOpOrder = ["xformOp:translate"]
+                    }
+
+                    # Blade 1 — CCW (blue), 2-blade propeller
+                    def Xform "blade1"
+                    {
+                        double3 xformOp:translate = (0, 0, 0.031)
+                        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+                        def Xform "blade1_visual_a" (
+                            prepend references = @./instances.usda@</Instances/Corps2_2>
+                        )
+                        {
+                            float3 xformOp:rotateXYZ = (90, 0, 0)
+                            double3 xformOp:scale = (1, 1, 1)
+                            double3 xformOp:translate = (0, 0, 0)
+                            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+                            over "Corps2_2" {
+                                prepend rel material:binding = </basic_quadrotor/Materials/blue>
+                            }
+                        }
+
+                        def Xform "blade1_visual_b" (
+                            prepend references = @./instances.usda@</Instances/Corps2_2>
+                        )
+                        {
+                            float3 xformOp:rotateXYZ = (90, 0, 180)
+                            double3 xformOp:scale = (1, 1, 1)
+                            double3 xformOp:translate = (0, 0, 0)
+                            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+                            over "Corps2_2" {
+                                prepend rel material:binding = </basic_quadrotor/Materials/blue>
+                            }
+                        }
+                    }
+                }
+
+                # ---------- Motor 2 (+Y arm) ----------
+                def Xform "motor2"
+                {
+                    double3 xformOp:translate = (0, 0.17, 0.002)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+
+                    def Xform "motor2_visual" (
+                        prepend references = @./instances.usda@</Instances/motor1_link_visual_2>
+                    )
+                    {
+                        quatd xformOp:orient = (0.7071054578, 0.7071080804, 0, 0)
+                        double3 xformOp:scale = (1, 1, 1)
+                        double3 xformOp:translate = (0, 0, 0)
+                        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+                    }
+
+                    def Cylinder "motor2_collision" (
+                        prepend apiSchemas = ["PhysicsCollisionAPI"]
+                    )
+                    {
+                        uniform token purpose = "guide"
+                        double height = 0.02
+                        double radius = 0.016
+                        double3 xformOp:translate = (0, 0, 0)
+                        uniform token[] xformOpOrder = ["xformOp:translate"]
+                    }
+
+                    # Blade 2 — CW (red), 2-blade propeller
+                    def Xform "blade2"
+                    {
+                        double3 xformOp:translate = (0, 0, 0.031)
+                        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+                        def Xform "blade2_visual_a" (
+                            prepend references = @./instances.usda@</Instances/Corps2_3>
+                        )
+                        {
+                            float3 xformOp:rotateXYZ = (90, 0, 0)
+                            double3 xformOp:scale = (1, 1, 1)
+                            double3 xformOp:translate = (0, 0, 0)
+                            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+                            over "Corps2_3" {
+                                prepend rel material:binding = </basic_quadrotor/Materials/red>
+                            }
+                        }
+
+                        def Xform "blade2_visual_b" (
+                            prepend references = @./instances.usda@</Instances/Corps2_3>
+                        )
+                        {
+                            float3 xformOp:rotateXYZ = (90, 0, 180)
+                            double3 xformOp:scale = (1, 1, 1)
+                            double3 xformOp:translate = (0, 0, 0)
+                            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+                            over "Corps2_3" {
+                                prepend rel material:binding = </basic_quadrotor/Materials/red>
+                            }
+                        }
+                    }
+                }
+
+                # ---------- Motor 3 (-X arm) ----------
+                def Xform "motor3"
+                {
+                    double3 xformOp:translate = (-0.17, 0, 0.002)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+
+                    def Xform "motor3_visual" (
+                        prepend references = @./instances.usda@</Instances/motor1_link_visual_3>
+                    )
+                    {
+                        quatd xformOp:orient = (0.7071054578, 0.7071080804, 0, 0)
+                        double3 xformOp:scale = (1, 1, 1)
+                        double3 xformOp:translate = (0, 0, 0)
+                        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+                    }
+
+                    def Cylinder "motor3_collision" (
+                        prepend apiSchemas = ["PhysicsCollisionAPI"]
+                    )
+                    {
+                        uniform token purpose = "guide"
+                        double height = 0.02
+                        double radius = 0.016
+                        double3 xformOp:translate = (0, 0, 0)
+                        uniform token[] xformOpOrder = ["xformOp:translate"]
+                    }
+
+                    # Blade 3 — CCW (blue), 2-blade propeller
+                    def Xform "blade3"
+                    {
+                        double3 xformOp:translate = (0, 0, 0.031)
+                        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+                        def Xform "blade3_visual_a" (
+                            prepend references = @./instances.usda@</Instances/Corps2_2>
+                        )
+                        {
+                            float3 xformOp:rotateXYZ = (90, 0, 0)
+                            double3 xformOp:scale = (1, 1, 1)
+                            double3 xformOp:translate = (0, 0, 0)
+                            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+                            over "Corps2_2" {
+                                prepend rel material:binding = </basic_quadrotor/Materials/blue>
+                            }
+                        }
+
+                        def Xform "blade3_visual_b" (
+                            prepend references = @./instances.usda@</Instances/Corps2_2>
+                        )
+                        {
+                            float3 xformOp:rotateXYZ = (90, 0, 180)
+                            double3 xformOp:scale = (1, 1, 1)
+                            double3 xformOp:translate = (0, 0, 0)
+                            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+                            over "Corps2_2" {
+                                prepend rel material:binding = </basic_quadrotor/Materials/blue>
+                            }
+                        }
+                    }
+                }
+
+                # ---------- Motor 4 (-Y arm) ----------
+                def Xform "motor4"
+                {
+                    double3 xformOp:translate = (0, -0.17, 0.002)
+                    uniform token[] xformOpOrder = ["xformOp:translate"]
+
+                    def Xform "motor4_visual" (
+                        prepend references = @./instances.usda@</Instances/motor1_link_visual_4>
+                    )
+                    {
+                        quatd xformOp:orient = (0.7071054578, 0.7071080804, 0, 0)
+                        double3 xformOp:scale = (1, 1, 1)
+                        double3 xformOp:translate = (0, 0, 0)
+                        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+                    }
+
+                    def Cylinder "motor4_collision" (
+                        prepend apiSchemas = ["PhysicsCollisionAPI"]
+                    )
+                    {
+                        uniform token purpose = "guide"
+                        double height = 0.02
+                        double radius = 0.016
+                        double3 xformOp:translate = (0, 0, 0)
+                        uniform token[] xformOpOrder = ["xformOp:translate"]
+                    }
+
+                    # Blade 4 — CW (red), 2-blade propeller
+                    def Xform "blade4"
+                    {
+                        double3 xformOp:translate = (0, 0, 0.031)
+                        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+                        def Xform "blade4_visual_a" (
+                            prepend references = @./instances.usda@</Instances/Corps2_3>
+                        )
+                        {
+                            float3 xformOp:rotateXYZ = (90, 0, 0)
+                            double3 xformOp:scale = (1, 1, 1)
+                            double3 xformOp:translate = (0, 0, 0)
+                            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+                            over "Corps2_3" {
+                                prepend rel material:binding = </basic_quadrotor/Materials/red>
+                            }
+                        }
+
+                        def Xform "blade4_visual_b" (
+                            prepend references = @./instances.usda@</Instances/Corps2_3>
+                        )
+                        {
+                            float3 xformOp:rotateXYZ = (90, 0, 180)
+                            double3 xformOp:scale = (1, 1, 1)
+                            double3 xformOp:translate = (0, 0, 0)
+                            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+                            over "Corps2_3" {
+                                prepend rel material:binding = </basic_quadrotor/Materials/red>
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    # ---------- Joints ----------
+    def Scope "Physics"
+    {
+        # No root_joint — base_link is a free-floating articulation root (falls under gravity)
+        # No base_to_frame_joint — frame is a child of base_link in the USD hierarchy
+
+        def PhysicsFixedJoint "motor1_joint"
+        {
+            prepend rel physics:body0 = </basic_quadrotor/Geometry/base_link/frame>
+            prepend rel physics:body1 = </basic_quadrotor/Geometry/base_link/frame/motor1>
+            point3f physics:localPos0 = (0.17, 0, 0.002)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (1, 0, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def PhysicsFixedJoint "motor2_joint"
+        {
+            prepend rel physics:body0 = </basic_quadrotor/Geometry/base_link/frame>
+            prepend rel physics:body1 = </basic_quadrotor/Geometry/base_link/frame/motor2>
+            point3f physics:localPos0 = (0, 0.17, 0.002)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (1, 0, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def PhysicsFixedJoint "motor3_joint"
+        {
+            prepend rel physics:body0 = </basic_quadrotor/Geometry/base_link/frame>
+            prepend rel physics:body1 = </basic_quadrotor/Geometry/base_link/frame/motor3>
+            point3f physics:localPos0 = (-0.17, 0, 0.002)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (1, 0, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def PhysicsFixedJoint "motor4_joint"
+        {
+            prepend rel physics:body0 = </basic_quadrotor/Geometry/base_link/frame>
+            prepend rel physics:body1 = </basic_quadrotor/Geometry/base_link/frame/motor4>
+            point3f physics:localPos0 = (0, -0.17, 0.002)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (1, 0, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def PhysicsRevoluteJoint "blade1_joint"
+        {
+            uniform token physics:axis = "Z"
+            prepend rel physics:body0 = </basic_quadrotor/Geometry/base_link/frame/motor1>
+            prepend rel physics:body1 = </basic_quadrotor/Geometry/base_link/frame/motor1/blade1>
+            point3f physics:localPos0 = (0, 0, 0.031)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (1, 0, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def PhysicsRevoluteJoint "blade2_joint"
+        {
+            uniform token physics:axis = "Z"
+            prepend rel physics:body0 = </basic_quadrotor/Geometry/base_link/frame/motor2>
+            prepend rel physics:body1 = </basic_quadrotor/Geometry/base_link/frame/motor2/blade2>
+            point3f physics:localPos0 = (0, 0, 0.031)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (1, 0, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def PhysicsRevoluteJoint "blade3_joint"
+        {
+            uniform token physics:axis = "Z"
+            prepend rel physics:body0 = </basic_quadrotor/Geometry/base_link/frame/motor3>
+            prepend rel physics:body1 = </basic_quadrotor/Geometry/base_link/frame/motor3/blade3>
+            point3f physics:localPos0 = (0, 0, 0.031)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (1, 0, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+
+        def PhysicsRevoluteJoint "blade4_joint"
+        {
+            uniform token physics:axis = "Z"
+            prepend rel physics:body0 = </basic_quadrotor/Geometry/base_link/frame/motor4>
+            prepend rel physics:body1 = </basic_quadrotor/Geometry/base_link/frame/motor4/blade4>
+            point3f physics:localPos0 = (0, 0, 0.031)
+            point3f physics:localPos1 = (0, 0, 0)
+            quatf physics:localRot0 = (1, 0, 0, 0)
+            quatf physics:localRot1 = (1, 0, 0, 0)
+        }
+    }
+}

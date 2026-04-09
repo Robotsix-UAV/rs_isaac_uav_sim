@@ -1,0 +1,13 @@
+#usda 1.0
+(
+    defaultPrim = "basic_quadrotor"
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "basic_quadrotor" (
+    prepend references = @./payloads/base.usda@
+)
+{
+}

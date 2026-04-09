@@ -1,0 +1,19 @@
+title: rs_isaac_uav_sim
+description: GPU-accelerated UAV flight simulation with Isaac Sim 6.0 + PX4 SITL
+theme: jekyll-theme-cayman
+show_downloads: false
+markdown: kramdown
+kramdown:
+  syntax_highlighter: rouge
+plugins:
+  - jekyll-relative-links
+relative_links:
+  enabled: true
+  collections: false
+include:
+  - README.md
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
