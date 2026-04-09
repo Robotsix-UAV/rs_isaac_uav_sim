@@ -18,6 +18,7 @@
 import collections
 import math
 import os
+import time
 from typing import Any, Optional
 
 from ament_index_python.packages import get_package_share_directory
@@ -164,6 +165,13 @@ class DroneSimManager:
 
         # Render timing tracking (populated by record_render_timing; GUI only)
         self._render_durations: collections.deque = collections.deque(maxlen=100)
+
+        # Per-phase timing breakdown of step() — temporary instrumentation
+        # to attribute the wall-clock cost of one physics step. All in ms.
+        self._phase_gpu_read: collections.deque = collections.deque(maxlen=2000)
+        self._phase_per_drone: collections.deque = collections.deque(maxlen=2000)
+        self._phase_apply: collections.deque = collections.deque(maxlen=2000)
+        self._phase_step_total: collections.deque = collections.deque(maxlen=2000)
 
     @staticmethod
     def _grid_positions(num_drones: int, spacing: float = 2.0,
@@ -327,6 +335,7 @@ class DroneSimManager:
             return
 
         torch = self._torch
+        _t_step_begin = time.monotonic()
 
         # --- 1. Read state from GPU ---
         # Batch the three tensors into one before transferring to CPU.
@@ -339,6 +348,7 @@ class DroneSimManager:
         positions_np = _batch[:, :3]          # (N, 3)
         orientations_np = _batch[:, 3:7]      # (N, 4) [w, x, y, z]
         velocities_np = _batch[:, 7:]         # (N, 6) [vx,vy,vz,wx,wy,wz]
+        _t_after_gpu_read = time.monotonic()
 
         # Prepare output buffers
         forces_world = np.zeros((self.num_drones, 3))
@@ -423,6 +433,8 @@ class DroneSimManager:
             forces_world[i] = rot.apply(force_body)
             torques_world[i] = rot.apply(torque_body)
 
+        _t_after_per_drone = time.monotonic()
+
         # Apply forces and torques via GPU tensor API (_frame_view has PhysicsRigidBodyAPI)
         forces_tensor = torch.tensor(  # type: ignore
             forces_world, dtype=torch.float32,  # type: ignore
@@ -435,6 +447,13 @@ class DroneSimManager:
         self._frame_view.apply_forces_and_torques_at_pos(  # type: ignore
             forces_tensor, torques_tensor, is_global=True
         )
+        _t_after_apply = time.monotonic()
+
+        # Per-phase timing breakdown (ms)
+        self._phase_gpu_read.append((_t_after_gpu_read - _t_step_begin) * 1000.0)
+        self._phase_per_drone.append((_t_after_per_drone - _t_after_gpu_read) * 1000.0)
+        self._phase_apply.append((_t_after_apply - _t_after_per_drone) * 1000.0)
+        self._phase_step_total.append((_t_after_apply - _t_step_begin) * 1000.0)
 
         # Diagnostics
         self._diag_counter += 1
@@ -511,6 +530,22 @@ class DroneSimManager:
         else:
             render_str = 'N/A (headless)'
 
+        # Per-phase step() breakdown — temporary instrumentation
+        def _phase_str(samples: collections.deque, label: str) -> str:
+            xs = list(samples)
+            samples.clear()
+            if not xs:
+                return f'{label} N/A'
+            return (f'{label}={sum(xs)/len(xs):.2f}/{min(xs):.2f}/{max(xs):.2f}'
+                    f' (avg/min/max ms, n={len(xs)})')
+
+        phase_str = (
+            _phase_str(self._phase_step_total, 'total') + '  ' +
+            _phase_str(self._phase_gpu_read, 'gpu_read') + '  ' +
+            _phase_str(self._phase_per_drone, 'per_drone') + '  ' +
+            _phase_str(self._phase_apply, 'apply')
+        )
+
         print(f'[DIAG t={SimulationContext.instance().current_time:.1f}s]')
         print(f'  Loop  : {loop_str}  (begin={t_begin_str}  end={t_end_str})')
         print(f'  Render: {render_str}')
@@ -519,6 +554,7 @@ class DroneSimManager:
             f'(sensor_sent={sensor_sent_str}  actuator_recv={actuator_recv_str})'
         )
         print(f'  sync={offset_str}  rt={rt_str}')
+        print(f'  Phase : {phase_str}')
 
         for i, b in enumerate(self.backends):
             ctrl = b.raw_controls

@@ -27,6 +27,15 @@ over "basic_quadrotor"
         )
         {
             bool physxArticulation:enabledSelfCollisions = 0
+            # PX4-controlled hover rarely makes contacts, so the
+            # default PhysX iteration counts are way more than this
+            # articulation needs. Lowering them halves the per-step
+            # PhysX cost. 4 pos / 1 vel still keeps the open-loop
+            # mock-controller test stable; pushing lower (2/1)
+            # introduces enough joint slop for the rotors to drift
+            # the drone laterally during open-loop hover.
+            int physxArticulation:solverPositionIterationCount = 4
+            int physxArticulation:solverVelocityIterationCount = 1
             point3f physics:centerOfMass = (0, 0, 0)
             float3 physics:diagonalInertia = (1e-6, 1e-6, 1e-6)
             float physics:mass = 0.001
