@@ -62,28 +62,36 @@ import carb  # noqa: E402, I100
 
 _s = carb.settings.get_settings()
 
-# Lower render quality to improve frame-rate performance
+# Balanced render config: keep RaytracedLighting (fastest RTX path) and the
+# cheap visual quality wins (shadows, TAA, AO, auto-exposure) which give
+# the biggest "looks like a real scene" boost per millisecond. Skip the
+# truly expensive features (indirect diffuse GI, real-time reflections,
+# path tracing) and the post-processing junk that adds visual noise
+# without telling you anything (motion blur, chromatic aberration,
+# vignette, lens flares).
 _s.set('/rtx/rendermode', 'RaytracedLighting')
-_s.set('/rtx/post/aa/op', 0)                        # disable TAA/DLSS (0 = off)
-_s.set('/rtx/pathtracing/spp', 1)                   # samples-per-pixel
-_s.set('/rtx/shadows/enabled', False)               # disable real-time shadows
-_s.set('/rtx/ambientOcclusion/enabled', False)      # disable ambient occlusion
-_s.set('/rtx/reflections/enabled', False)           # disable reflections
-_s.set('/rtx/indirectDiffuse/enabled', False)       # disable indirect diffuse GI
-_s.set('/rtx/post/dlss/enabled', False)             # disable DLSS upscaling
-_s.set('/rtx/post/taa/enabled', False)              # disable TAA
-_s.set('/rtx/post/fog/enabled', False)              # disable atmospheric fog
-# Additional post-processing passes — measured -0.75 ms per render call (bench1 B vs A)
-_s.set_bool('/rtx/post/histogram/enabled', False)       # disable auto-exposure histogram
-_s.set_bool('/rtx/post/lensFlares/enabled', False)      # disable lens flares
-_s.set_bool('/rtx/post/motionblur/enabled', False)      # disable motion blur
-_s.set_bool('/rtx/post/chromaticAberration/enabled', False)  # disable chromatic aberration
-_s.set_bool('/rtx/post/vignetteMask/enabled', False)    # disable vignette
+_s.set('/rtx/pathtracing/spp', 1)                # PT samples (only matters in PT mode)
+_s.set('/rtx/shadows/enabled', True)             # real-time shadows: biggest visual win
+_s.set('/rtx/ambientOcclusion/enabled', True)    # AO: contact darkening
+_s.set('/rtx/reflections/enabled', True)         # specular reflections on shiny surfaces
+_s.set('/rtx/indirectDiffuse/enabled', True)     # one-bounce indirect diffuse GI
+_s.set('/rtx/post/aa/op', 3)                     # TAA mode (1=FXAA, 2=SMAA, 3=TAA)
+_s.set('/rtx/post/taa/enabled', True)            # TAA pass for edge anti-alias
+_s.set('/rtx/post/dlss/enabled', False)          # DLSS off
+_s.set('/rtx/post/fog/enabled', False)           # no atmospheric fog
+# Auto-exposure: ON, otherwise the scene looks washed out / dark
+_s.set_bool('/rtx/post/histogram/enabled', True)
+# Junk post-processing: still off (no info value)
+_s.set_bool('/rtx/post/lensFlares/enabled', False)
+_s.set_bool('/rtx/post/motionblur/enabled', False)
+_s.set_bool('/rtx/post/chromaticAberration/enabled', False)
+_s.set_bool('/rtx/post/vignetteMask/enabled', False)
 # Skip writing physics results back to USD layer — renderer uses Fabric directly.
 # Measured: saves ~0.34 ms on loop average (bench4 A vs C), allows GPU pipeline
 # to run more freely. Safe because we read state via get_world_poses(usd=False).
 _s.set_bool('/physics/updateToUSD', False)
-print('[RENDER] Low-quality render mode applied (RaytracedLighting, all post-processing off).')
+print('[RENDER] Balanced render mode applied '
+      '(RaytracedLighting + shadows + AO + TAA + auto-exposure).')
 
 if not args.headless:
     print(f'[RENDER] asyncRendering={_s.get("/app/asyncRendering")}  '

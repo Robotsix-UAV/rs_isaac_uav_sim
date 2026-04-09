@@ -297,6 +297,18 @@ class DroneSimManager:
             torch.zeros(self.num_drones, device=self._device)
         )
 
+        # Pre-allocate the force/torque CUDA tensors that step() reuses on
+        # every iteration. Constructing fresh torch.tensor(...) each step
+        # forces a host->device copy of a 3-element numpy buffer through
+        # python; copy_(...) on a pre-allocated tensor reuses the buffer
+        # and avoids that allocation/dispatch each frame.
+        self._forces_tensor = torch.zeros(  # type: ignore
+            (self.num_drones, 3), dtype=torch.float32, device=self._device
+        )
+        self._torques_tensor = torch.zeros(  # type: ignore
+            (self.num_drones, 3), dtype=torch.float32, device=self._device
+        )
+
         print(f'[VEHICLE] ArticulationView initialized for {self.num_drones} '
               f'drone(s).')
 
@@ -435,17 +447,20 @@ class DroneSimManager:
 
         _t_after_per_drone = time.monotonic()
 
-        # Apply forces and torques via GPU tensor API (_frame_view has PhysicsRigidBodyAPI)
-        forces_tensor = torch.tensor(  # type: ignore
-            forces_world, dtype=torch.float32,  # type: ignore
-            device=self._device
+        # Apply forces and torques via GPU tensor API (_frame_view has
+        # PhysicsRigidBodyAPI). Reuse the pre-allocated tensors instead
+        # of constructing fresh ones each step — copy_() avoids the
+        # per-step allocation + dispatch cost of torch.tensor(...).
+        self._forces_tensor.copy_(  # type: ignore
+            torch.from_numpy(forces_world.astype(np.float32, copy=False)),  # type: ignore
+            non_blocking=True,
         )
-        torques_tensor = torch.tensor(  # type: ignore
-            torques_world, dtype=torch.float32,  # type: ignore
-            device=self._device
+        self._torques_tensor.copy_(  # type: ignore
+            torch.from_numpy(torques_world.astype(np.float32, copy=False)),  # type: ignore
+            non_blocking=True,
         )
         self._frame_view.apply_forces_and_torques_at_pos(  # type: ignore
-            forces_tensor, torques_tensor, is_global=True
+            self._forces_tensor, self._torques_tensor, is_global=True
         )
         _t_after_apply = time.monotonic()
 
