@@ -451,10 +451,11 @@ class DroneSimManager:
             self._forces_tensor, self._torques_tensor, is_global=True
         )
 
-        # Diagnostics
-        self._diag_counter += 1
-        if (self._diag_counter % self._diag_divider) == 0:
-            self._print_diagnostics(positions_np, orientations_np, velocities_np, forces_world)
+        # Diagnostics — opt-in via the manager's verbose flag
+        if self._verbose:
+            self._diag_counter += 1
+            if (self._diag_counter % self._diag_divider) == 0:
+                self._print_diagnostics(positions_np, orientations_np, velocities_np, forces_world)
 
     def record_loop_timing(self, t_begin: float, t_end: float) -> None:
         """Record wall-clock timing for a full simulation loop iteration."""

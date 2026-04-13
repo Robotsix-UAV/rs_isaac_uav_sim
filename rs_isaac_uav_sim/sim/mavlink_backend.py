@@ -17,6 +17,7 @@
 """PX4 MAVLink HIL backend: sends sensor data, receives motor commands via TCP."""
 
 import collections
+import os
 import time
 
 from isaacsim.core.api import SimulationContext
@@ -63,7 +64,7 @@ class PX4MavlinkHIL:
         self._params = params
         self._port = params.base_port + vehicle_id
         self._connection_str = (
-            f'{MAVLINK_CONNECTION_TYPE}:{params.connection_ip}:{self._port}'
+            f"{MAVLINK_CONNECTION_TYPE}:{params.connection_ip}:{self._port}"
         )
         self._connection = None
         self._is_running = False
@@ -124,8 +125,8 @@ class PX4MavlinkHIL:
         # ------------------------------------------------------------------ #
         # Rate monitoring                                                     #
         # ------------------------------------------------------------------ #
-        self._last_arrival_mono: float | None = None   # monotonic time of previous msg
-        self._last_arrival_utime: int | None = None    # sim time (µs) of previous msg
+        self._last_arrival_mono: float | None = None  # monotonic time of previous msg
+        self._last_arrival_utime: int | None = None  # sim time (µs) of previous msg
 
         # ------------------------------------------------------------------ #
         # Timing debug state                                                  #
@@ -201,12 +202,12 @@ class PX4MavlinkHIL:
         return (sum(samples) / len(samples), min(samples), max(samples))
 
     @property
-    def t_last_sensor_sent_mono(self) -> 'float | None':
+    def t_last_sensor_sent_mono(self) -> "float | None":
         """Return monotonic timestamp of last sensor send completion."""
         return self._t_sensor_sent
 
     @property
-    def t_last_actuator_recv_mono(self) -> 'float | None':
+    def t_last_actuator_recv_mono(self) -> "float | None":
         """Return monotonic timestamp of last actuator message received."""
         return self._last_arrival_mono
 
@@ -218,8 +219,10 @@ class PX4MavlinkHIL:
         """Open TCP connection."""
         if self._is_running:
             return
-        print(f'[MAVLink] Vehicle {self._vehicle_id}: connecting to '
-              f'{self._connection_str}')
+        print(
+            f"[MAVLink] Vehicle {self._vehicle_id}: connecting to "
+            f"{self._connection_str}"
+        )
         self._connection = mavutil.mavlink_connection(self._connection_str)
         self._is_running = True
         self._received_first_heartbeat = False
@@ -232,9 +235,9 @@ class PX4MavlinkHIL:
             if self._connection is None:
                 return False
             msg = self._connection.recv_match(blocking=True, timeout=0.5)  # type: ignore[call-arg]
-            if msg is not None and msg.get_type() == 'HEARTBEAT':
+            if msg is not None and msg.get_type() == "HEARTBEAT":
                 self._received_first_heartbeat = True
-                print(f'[MAVLink] Vehicle {self._vehicle_id}: received first heartbeat')
+                print(f"[MAVLink] Vehicle {self._vehicle_id}: received first heartbeat")
                 return True
         return False
 
@@ -317,9 +320,7 @@ class PX4MavlinkHIL:
         self._t_sensor_sent = time.monotonic()
 
         # --- NON-BLOCKING RECV: pick up latest actuator command if available ---
-        msg = self._connection.recv_match(
-            type='HIL_ACTUATOR_CONTROLS', blocking=False
-        )
+        msg = self._connection.recv_match(type="HIL_ACTUATOR_CONTROLS", blocking=False)
 
         if msg is not None:
             now_mono = time.monotonic()
@@ -340,7 +341,9 @@ class PX4MavlinkHIL:
             self._last_actuator_wall_time = time.time()
             msg_time_usec: int = msg.time_usec  # type: ignore[assignment]
             if self._last_actuator_time_usec is not None:
-                self._last_actuator_simdt_us = msg_time_usec - self._last_actuator_time_usec
+                self._last_actuator_simdt_us = (
+                    msg_time_usec - self._last_actuator_time_usec
+                )
             self._last_actuator_time_usec = msg_time_usec
             self._t_actuator_recv_for_debug = now_mono
 
@@ -349,8 +352,13 @@ class PX4MavlinkHIL:
             self._received_first_actuator = True
 
         # --- Periodic timing debug output (every 2 s) ---
+        # Off by default; enable with RS_ISAAC_TIMING_DEBUG=1 when diagnosing
+        # lockstep / latency issues.
         _now_debug = time.monotonic()
-        if _now_debug - self._last_debug_print_time >= 2.0:
+        if (
+            os.environ.get("RS_ISAAC_TIMING_DEBUG", "0") == "1"
+            and _now_debug - self._last_debug_print_time >= 2.0
+        ):
             self._last_debug_print_time = _now_debug
 
             # 1. PX4 round-trip latency: HIL_SENSOR sent → HIL_ACTUATOR_CONTROLS received
@@ -358,50 +366,52 @@ class PX4MavlinkHIL:
             if _px4_samples:
                 _px4_rtt_ms = sum(_px4_samples) / len(_px4_samples)
             else:
-                _px4_rtt_ms = float('nan')
+                _px4_rtt_ms = float("nan")
 
             # 3. Sim-side delay: actuator received → sensor sent (this cycle)
             if t_actuator_snap is not None:
                 _sim_delay_ms = (self._t_sensor_sent - t_actuator_snap) * 1000.0
             else:
-                _sim_delay_ms = float('nan')
+                _sim_delay_ms = float("nan")
 
             # 4. Time sync offset: difference between current sim time and PX4's
             #    last echoed time_usec (healthy lockstep ≈ one physics_dt)
             sync_offset = self.time_sync_offset_us
             if sync_offset is not None:
-                _sync_str = f'{int(sync_offset)} µs'
+                _sync_str = f"{int(sync_offset)} µs"
                 if abs(sync_offset) > 10000:
-                    _sync_str += ' WARNING'
+                    _sync_str += " WARNING"
             else:
-                _sync_str = 'N/A'
+                _sync_str = "N/A"
 
             # 5. Time-drift ratio: PX4 time growth vs sim time growth over window
             #    Healthy: ≈ 1.0. Drift means PX4 is running faster/slower than sim.
-            if (self._diag_ref_sim_utime is not None
-                    and self._diag_ref_px4_utime is not None
-                    and self._last_arrival_utime is not None):
+            if (
+                self._diag_ref_sim_utime is not None
+                and self._diag_ref_px4_utime is not None
+                and self._last_arrival_utime is not None
+            ):
                 sim_delta = self._current_utime - self._diag_ref_sim_utime
                 px4_delta = self._last_arrival_utime - self._diag_ref_px4_utime
                 if sim_delta > 0 and px4_delta > 0:
                     _drift_ratio = px4_delta / sim_delta
-                    _drift_str = f'{_drift_ratio:.3f}'
+                    _drift_str = f"{_drift_ratio:.3f}"
                     if abs(_drift_ratio - 1.0) > 0.05:
-                        _drift_str += ' WARNING'
+                        _drift_str += " WARNING"
                 else:
-                    _drift_str = 'N/A'
+                    _drift_str = "N/A"
             else:
-                _drift_str = 'N/A'
+                _drift_str = "N/A"
             # Reset window references
             self._diag_ref_sim_utime = self._current_utime
             self._diag_ref_px4_utime = self._last_arrival_utime
 
             print(
-                f'[TIMING DEBUG] Vehicle {self._vehicle_id}: '
-                f'px4_rtt={_px4_rtt_ms:.2f} ms | '
-                f'sim_delay={_sim_delay_ms:.2f} ms | '
-                f'time_sync={_sync_str} | '
-                f'time_drift={_drift_str}'
+                f"[TIMING DEBUG] Vehicle {self._vehicle_id}: "
+                f"px4_rtt={_px4_rtt_ms:.2f} ms | "
+                f"sim_delay={_sim_delay_ms:.2f} ms | "
+                f"time_sync={_sync_str} | "
+                f"time_drift={_drift_str}"
             )
 
         if self._use_gps:
@@ -417,7 +427,7 @@ class PX4MavlinkHIL:
 
     def _apply_control(self, controls, mode):
         """Apply a decoded HIL_ACTUATOR_CONTROLS entry on the main thread."""
-        self._raw_controls[:] = controls[:self._num_rotors]
+        self._raw_controls[:] = controls[: self._num_rotors]
         self._raw_mode = mode
 
         if mode & mavutil.mavlink.MAV_MODE_FLAG_SAFETY_ARMED:
@@ -425,9 +435,9 @@ class PX4MavlinkHIL:
             fac = self._thr_mdl_fac
             for i in range(self._num_rotors):
                 u = max(0.0, min(1.0, controls[i]))
-                omega_norm = fac * u + (1.0 - fac) * u ** 0.5
-                self._motor_commands[i] = (
-                    self._omega_min + omega_norm * (self._omega_max - self._omega_min)
+                omega_norm = fac * u + (1.0 - fac) * u**0.5
+                self._motor_commands[i] = self._omega_min + omega_norm * (
+                    self._omega_max - self._omega_min
                 )
         else:
             self._armed = False
@@ -442,7 +452,9 @@ class PX4MavlinkHIL:
         self._connection.mav.heartbeat_send(  # type: ignore
             mavutil.mavlink.MAV_TYPE_GENERIC,
             mavutil.mavlink.MAV_AUTOPILOT_INVALID,
-            0, 0, 0,
+            0,
+            0,
+            0,
         )
 
     def _send_sensor_msgs(self, time_usec: int):
@@ -468,24 +480,23 @@ class PX4MavlinkHIL:
         try:
             self._connection.mav.hil_sensor_send(  # type: ignore
                 time_usec,
-                imu.get('linear_acceleration', [0, 0, 0])[0],
-                imu.get('linear_acceleration', [0, 0, 0])[1],
-                imu.get('linear_acceleration', [0, 0, 0])[2],
-                imu.get('angular_velocity', [0, 0, 0])[0],
-                imu.get('angular_velocity', [0, 0, 0])[1],
-                imu.get('angular_velocity', [0, 0, 0])[2],
-                mag.get('magnetic_field', [0, 0, 0])[0],
-                mag.get('magnetic_field', [0, 0, 0])[1],
-                mag.get('magnetic_field', [0, 0, 0])[2],
-                baro.get('absolute_pressure', 0.0),
+                imu.get("linear_acceleration", [0, 0, 0])[0],
+                imu.get("linear_acceleration", [0, 0, 0])[1],
+                imu.get("linear_acceleration", [0, 0, 0])[2],
+                imu.get("angular_velocity", [0, 0, 0])[0],
+                imu.get("angular_velocity", [0, 0, 0])[1],
+                imu.get("angular_velocity", [0, 0, 0])[2],
+                mag.get("magnetic_field", [0, 0, 0])[0],
+                mag.get("magnetic_field", [0, 0, 0])[1],
+                mag.get("magnetic_field", [0, 0, 0])[2],
+                baro.get("absolute_pressure", 0.0),
                 0.0,  # diff_pressure
-                baro.get('pressure_altitude', 0.0),
-                baro.get('temperature', 0.0),
+                baro.get("pressure_altitude", 0.0),
+                baro.get("temperature", 0.0),
                 fields_updated,
             )
         except Exception as e:
-            print(f'[MAVLink] Vehicle {self._vehicle_id}: sensor send error: '
-                  f'{e}')
+            print(f"[MAVLink] Vehicle {self._vehicle_id}: sensor send error: " f"{e}")
 
     def _send_gps_msgs(self, time_usec: int):
         """Send HIL_GPS message if new data available."""
@@ -497,21 +508,21 @@ class PX4MavlinkHIL:
         try:
             self._connection.mav.hil_gps_send(  # type: ignore
                 time_usec,
-                int(gps.get('fix_type', 3)),
-                int(gps.get('latitude', 0) * 10_000_000),
-                int(gps.get('longitude', 0) * 10_000_000),
-                int(gps.get('altitude', 0) * 1000),
-                int(gps.get('eph', 1.0)),
-                int(gps.get('epv', 1.0)),
-                int(gps.get('speed', 0) * 100),
-                int(gps.get('velocity_north', 0) * 100),
-                int(gps.get('velocity_east', 0) * 100),
-                int(gps.get('velocity_down', 0) * 100),
-                int(gps.get('cog', 0) * 100),
-                int(gps.get('sattelites_visible', 10)),
+                int(gps.get("fix_type", 3)),
+                int(gps.get("latitude", 0) * 10_000_000),
+                int(gps.get("longitude", 0) * 10_000_000),
+                int(gps.get("altitude", 0) * 1000),
+                int(gps.get("eph", 1.0)),
+                int(gps.get("epv", 1.0)),
+                int(gps.get("speed", 0) * 100),
+                int(gps.get("velocity_north", 0) * 100),
+                int(gps.get("velocity_east", 0) * 100),
+                int(gps.get("velocity_down", 0) * 100),
+                int(gps.get("cog", 0) * 100),
+                int(gps.get("sattelites_visible", 10)),
             )
         except Exception as e:
-            print(f'[MAVLink] Vehicle {self._vehicle_id}: GPS send error: {e}')
+            print(f"[MAVLink] Vehicle {self._vehicle_id}: GPS send error: {e}")
 
     def _send_odometry_msg(self, time_usec: int):
         """Send ODOMETRY message (ID 331) with visual odometry data."""
@@ -524,27 +535,26 @@ class PX4MavlinkHIL:
                 time_usec,
                 1,  # frame_id: MAV_FRAME_LOCAL_NED = 1
                 8,  # child_frame_id: MAV_FRAME_BODY_FRD = 8
-                float(data.get('x', 0.0)),
-                float(data.get('y', 0.0)),
-                float(data.get('z', 0.0)),
+                float(data.get("x", 0.0)),
+                float(data.get("y", 0.0)),
+                float(data.get("z", 0.0)),
                 [
-                    float(v)
-                    for v in data.get('q', [1.0, 0.0, 0.0, 0.0])
+                    float(v) for v in data.get("q", [1.0, 0.0, 0.0, 0.0])
                 ],  # quaternion [w,x,y,z]
-                float(data.get('vx', 0.0)),
-                float(data.get('vy', 0.0)),
-                float(data.get('vz', 0.0)),
-                float(data.get('rollspeed', 0.0)),
-                float(data.get('pitchspeed', 0.0)),
-                float(data.get('yawspeed', 0.0)),
-                [float('nan')] * 21,  # pose_covariance (unknown)
-                [float('nan')] * 21,  # velocity_covariance (unknown)
+                float(data.get("vx", 0.0)),
+                float(data.get("vy", 0.0)),
+                float(data.get("vz", 0.0)),
+                float(data.get("rollspeed", 0.0)),
+                float(data.get("pitchspeed", 0.0)),
+                float(data.get("yawspeed", 0.0)),
+                [float("nan")] * 21,  # pose_covariance (unknown)
+                [float("nan")] * 21,  # velocity_covariance (unknown)
                 0,  # reset_counter
                 0,  # estimator_type: MAV_ESTIMATOR_TYPE_UNKNOWN = 0
                 -1,  # quality (-1 = unknown)
             )
         except Exception as e:
-            print(f'[MAVLink] Vehicle {self._vehicle_id}: odometry send error: {e}')
+            print(f"[MAVLink] Vehicle {self._vehicle_id}: odometry send error: {e}")
 
     def send_ground_truth(self, state: VehicleState, time_usec: int):
         """Send HIL_STATE_QUATERNION for ground truth."""
@@ -556,9 +566,9 @@ class PX4MavlinkHIL:
         lin_vel = state.get_linear_velocity_ned()
 
         # GPS lat/lon from ground truth (stored from update_gps)
-        sim_lat = int(self._gps_data.get('latitude_gt', 0) * 10_000_000)
-        sim_lon = int(self._gps_data.get('longitude_gt', 0) * 10_000_000)
-        sim_alt = int(self._gps_data.get('altitude_gt', 0) * 1000)
+        sim_lat = int(self._gps_data.get("latitude_gt", 0) * 10_000_000)
+        sim_lon = int(self._gps_data.get("longitude_gt", 0) * 10_000_000)
+        sim_alt = int(self._gps_data.get("altitude_gt", 0) * 1000)
 
         try:
             self._connection.mav.hil_state_quaternion_send(  # type: ignore
@@ -566,14 +576,23 @@ class PX4MavlinkHIL:
                 # MAVLink HIL_STATE_QUATERNION expects NED→FRD (world-to-body):
                 # conjugate of body-to-world = negate vector part, keep scalar
                 [att[3], -att[0], -att[1], -att[2]],
-                ang_vel[0], ang_vel[1], ang_vel[2],
-                sim_lat, sim_lon, sim_alt,
+                ang_vel[0],
+                ang_vel[1],
+                ang_vel[2],
+                sim_lat,
+                sim_lon,
+                sim_alt,
                 int(lin_vel[0] * 100),
                 int(lin_vel[1] * 100),
                 int(lin_vel[2] * 100),
-                0, 0,  # airspeed
-                0, 0, 0,  # acceleration
+                0,
+                0,  # airspeed
+                0,
+                0,
+                0,  # acceleration
             )
         except Exception as e:
-            print(f'[MAVLink] Vehicle {self._vehicle_id}: ground truth send '
-                  f'error: {e}')
+            print(
+                f"[MAVLink] Vehicle {self._vehicle_id}: ground truth send "
+                f"error: {e}"
+            )

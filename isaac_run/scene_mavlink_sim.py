@@ -34,6 +34,14 @@ parser.add_argument('--connection_ip', type=str, default='localhost',
                     help='IP address of the PX4 SITL instance (default: localhost)')
 parser.add_argument('--verbose', action='store_true',
                     help='Enable verbose MAVLink warnings')
+parser.add_argument('--ros2_namespaces', type=str, default='',
+                    help=('Comma-separated list of ROS 2 namespaces, one '
+                          'per drone (e.g. "crazy2fly1,crazy2fly2"). When '
+                          'set, Isaac Sim enables the isaacsim.ros2.bridge '
+                          'extension and publishes /clock plus '
+                          '<ns>/isaac_odom (nav_msgs/Odometry) from an '
+                          'OmniGraph, replacing the UDP ground-truth path. '
+                          'Empty disables the ROS 2 bridge path.'))
 args, _unknown = parser.parse_known_args()
 # Remove our custom flags from sys.argv so SimulationApp does not misinterpret them
 sys.argv = [sys.argv[0]] + _unknown
@@ -154,6 +162,151 @@ def setup_environment(world):
 
 
 # ---------------------------------------------------------------------------
+# 4b. ROS 2 bridge OmniGraph
+# ---------------------------------------------------------------------------
+def _setup_ros2_bridge_graph(
+    isaac_namespaces: list, ros2_namespaces: list
+) -> str:
+    """Build an OmniGraph that publishes /clock + per-drone Odometry.
+
+    Args
+    ----
+    isaac_namespaces
+        Prim-side namespace per drone (e.g. ``drone_0``). Used to build
+        the chassis prim path ``/World/{ns}/basic_quadrotor``.
+    ros2_namespaces
+        ROS 2 topic namespace per drone (e.g. ``crazy2fly1``). Used for
+        the published topic: ``/<ns>/isaac_odom`` so downstream LS2N
+        nodes, which already subscribe on per-drone namespaces, get
+        their odometry without remapping.
+
+    The graph contains one ``OnPlaybackTick`` + ``IsaacReadSimulationTime``
+    pair driving every publisher, which keeps node count low even for
+    multi-drone scenes. ``ROS2PublishOdometry`` emits Isaac's native ENU
+    world frame with body-frame twist (``publishRawVelocities=False``
+    rotates world velocities into the chassis frame); the LS2N-side
+    ``odom_enu_to_nwu_bridge`` takes care of the ENU→NWU conversion
+    expected by ``mocap/odom``.
+    """
+    # Enable the bridge extension lazily so users who don't ask for
+    # ROS 2 pay nothing at startup. We must do this BEFORE creating
+    # OmniGraph nodes that reference isaacsim.ros2.bridge.*.
+    # The correct path in Kit 106+/Isaac Sim 6 is via omni.kit.app.
+    import omni.kit.app
+    manager = omni.kit.app.get_app().get_extension_manager()
+    if not manager.is_extension_enabled('isaacsim.ros2.bridge'):
+        manager.set_extension_enabled_immediate(
+            'isaacsim.ros2.bridge', True,
+        )
+
+    import omni.graph.core as og
+    import usdrt.Sdf
+
+    keys = og.Controller.Keys
+    graph_path = '/World/RS_IsaacROS2Bridge'
+
+    nodes = [
+        ('OnPlaybackTick', 'isaacsim.core.nodes.OnPhysicsStep'),
+        ('ReadSimTime', 'isaacsim.core.nodes.IsaacReadSimulationTime'),
+        ('PublishClock', 'isaacsim.ros2.bridge.ROS2PublishClock'),
+    ]
+    set_values = [
+        ('PublishClock.inputs:topicName', 'clock'),
+    ]
+    connects = [
+        ('OnPlaybackTick.outputs:step', 'PublishClock.inputs:execIn'),
+        ('ReadSimTime.outputs:simulationTime', 'PublishClock.inputs:timeStamp'),
+    ]
+
+    for isaac_ns, ros_ns in zip(isaac_namespaces, ros2_namespaces):
+        # Point at the rigid-body base_link prim (not the Xform
+        # container) — ComputeOdometry reads physics state and needs
+        # a prim that has a RigidBodyAPI applied, which is where
+        # vehicle.py attaches the drone mass/inertia.
+        prim_path = f'/World/{isaac_ns}/basic_quadrotor/Geometry/base_link'
+        node_compute = f'ComputeOdometry_{ros_ns}'
+        node_publish = f'PublishOdometry_{ros_ns}'
+        nodes.extend([
+            (node_compute, 'isaacsim.core.nodes.IsaacComputeOdometry'),
+            (node_publish, 'isaacsim.ros2.bridge.ROS2PublishOdometry'),
+        ])
+        set_values.extend([
+            (
+                f'{node_compute}.inputs:chassisPrim',
+                [usdrt.Sdf.Path(prim_path)],
+            ),
+            # Publish per-drone on /<ros_ns>/isaac_odom. The downstream
+            # ENU→NWU bridge picks it up and feeds the LS2N drone_bridge
+            # on /<ros_ns>/mocap/odom.
+            (f'{node_publish}.inputs:topicName', 'isaac_odom'),
+            (f'{node_publish}.inputs:nodeNamespace', f'/{ros_ns}'),
+            (f'{node_publish}.inputs:odomFrameId', 'world_enu'),
+            (f'{node_publish}.inputs:chassisFrameId', ros_ns),
+            # Rotate world-frame velocities into the chassis frame, as
+            # nav_msgs/Odometry specifies twist in child_frame_id. This
+            # matches what mocap_from_isaac's UDP path was doing
+            # manually with _rotate_vec_by_quat_inv.
+            (f'{node_publish}.inputs:publishRawVelocities', False),
+        ])
+        connects.extend([
+            (
+                'OnPlaybackTick.outputs:step',
+                f'{node_compute}.inputs:execIn',
+            ),
+            (
+                f'{node_compute}.outputs:execOut',
+                f'{node_publish}.inputs:execIn',
+            ),
+            (
+                f'{node_compute}.outputs:position',
+                f'{node_publish}.inputs:position',
+            ),
+            (
+                f'{node_compute}.outputs:orientation',
+                f'{node_publish}.inputs:orientation',
+            ),
+            (
+                f'{node_compute}.outputs:linearVelocity',
+                f'{node_publish}.inputs:linearVelocity',
+            ),
+            (
+                f'{node_compute}.outputs:angularVelocity',
+                f'{node_publish}.inputs:angularVelocity',
+            ),
+            (
+                'ReadSimTime.outputs:simulationTime',
+                f'{node_publish}.inputs:timeStamp',
+            ),
+        ])
+
+    # Use GRAPH_PIPELINE_STAGE_ONDEMAND to match the pattern used by
+    # the stock Isaac Sim OnPhysicsStep tests — with that pipeline
+    # stage the graph is evaluated every time the application ticks,
+    # and the OnPhysicsStep node fires on every physics step that
+    # occurred since the last app tick. The default "execution"
+    # evaluator + ONDEMAND pipeline is what the upstream tests
+    # (test_physics_step.py) exercise; we follow that recipe.
+    og.Controller.edit(
+        {
+            'graph_path': graph_path,
+            'pipeline_stage': og.GraphPipelineStage.GRAPH_PIPELINE_STAGE_ONDEMAND,
+        },
+        {
+            keys.CREATE_NODES: nodes,
+            keys.SET_VALUES: set_values,
+            keys.CONNECT: connects,
+        },
+    )
+    ns_pairs = ', '.join(
+        f'{i}→/{r}/isaac_odom'
+        for i, r in zip(isaac_namespaces, ros2_namespaces)
+    )
+    print(f'[ROS2 BRIDGE] OmniGraph at {graph_path} publishing /clock + '
+          f'{ns_pairs}')
+    return graph_path
+
+
+# ---------------------------------------------------------------------------
 # 5. Main
 # ---------------------------------------------------------------------------
 def main():
@@ -225,6 +378,36 @@ def main():
     # Initialise GPU tensor views and connect MAVLink
     manager.initialize()
 
+    # Optional ROS 2 bridge OmniGraph: native /clock + per-drone
+    # nav_msgs/Odometry publishing via the Isaac Sim ROS 2 Bridge
+    # extension. Replaces the clock_from_px4 + UDP-ground-truth path
+    # with a single OmniGraph driven by the simulation playback tick,
+    # which is both simpler and cache-warmer than the two-process
+    # shim (no rclpy context living inside Carb).
+    if args.ros2_namespaces:
+        ros2_ns_list = [
+            ns.strip() for ns in args.ros2_namespaces.split(',') if ns.strip()
+        ]
+        if len(ros2_ns_list) != args.num_drones:
+            raise SystemExit(
+                f'[ROS2 BRIDGE] --ros2_namespaces has '
+                f'{len(ros2_ns_list)} entries but --num_drones={args.num_drones}; '
+                f'these must match.'
+            )
+        bridge_graph_path = _setup_ros2_bridge_graph(namespaces, ros2_ns_list)
+        # Keep a global reference so the main loop can push-evaluate
+        # the graph on every world.step(). The ONDEMAND pipeline stage
+        # means Isaac will only evaluate the graph when we tell it to,
+        # which is exactly what we want to lock mocap publishing to
+        # the physics rate (500 Hz) without paying for a full
+        # simulation_app.update() every tick.
+        import omni.timeline
+        omni.timeline.get_timeline_interface().play()
+        print('[ROS2 BRIDGE] Timeline started '
+              '(required for OnPhysicsStep to fire).')
+    else:
+        bridge_graph_path = None
+
     print('\n[READY] Simulation running. Start PX4 SITL instances now.')
     print(
         f'[INFO]  Connect PX4 to TCP ports '
@@ -237,10 +420,26 @@ def main():
     _render_every_n = max(1, round(MAVLINK_UPDATE_RATE / 50.0))
     _render_step = 0
 
+    # When the ROS 2 bridge OmniGraph is active we push-evaluate the
+    # graph directly after every world.step() via og.Controller.
+    # evaluate_sync. This locks mocap publishing to the physics rate
+    # (500 Hz) — equivalent to the UDP broadcaster's cadence — and
+    # avoids the per-tick overhead of simulation_app.update() (which
+    # also processes render/event queues we don't care about in
+    # headless MAVLink HIL).
+    if bridge_graph_path is not None:
+        import omni.graph.core as _og
+        _evaluate_bridge = lambda _p=bridge_graph_path: (
+            _og.Controller.evaluate_sync(_p))
+    else:
+        _evaluate_bridge = None
+
     while simulation_app.is_running():
         t_loop_begin = time.monotonic()
         manager.step(physics_dt)
         world.step(render=False)
+        if _evaluate_bridge is not None:
+            _evaluate_bridge()
         if not args.headless:
             _render_step += 1
             if _render_step >= _render_every_n:

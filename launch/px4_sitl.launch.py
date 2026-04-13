@@ -151,6 +151,7 @@ def _launch_setup(context, *args, **kwargs):  # noqa: ARG001
     verbose = LaunchConfiguration('verbose').perform(context)
     airframe_file = LaunchConfiguration('airframe_file').perform(context)
     extra_px4_env_str = LaunchConfiguration('extra_px4_env').perform(context)
+    ros2_namespaces = LaunchConfiguration('ros2_namespaces').perform(context)
 
     extra_px4_env, rejected_param_keys = _parse_extra_px4_env(extra_px4_env_str)
 
@@ -196,6 +197,8 @@ def _launch_setup(context, *args, **kwargs):  # noqa: ARG001
         isaac_cmd.append('--verbose')
     if config_file:
         isaac_cmd.extend(['--config', config_file])
+    if ros2_namespaces:
+        isaac_cmd.extend(['--ros2_namespaces', ros2_namespaces])
 
     actions.append(ExecuteProcess(cmd=isaac_cmd, output='screen'))
 
@@ -328,6 +331,17 @@ def generate_launch_description():
                 'PX4_PARAM_* env var mechanism is silently no-op\'d when '
                 'the target value matches the firmware default, so it is '
                 'not used here.'
+            ),
+        ),
+        DeclareLaunchArgument(
+            'ros2_namespaces',
+            default_value='',
+            description=(
+                'Comma-separated per-drone ROS 2 namespaces (e.g. '
+                '"crazy2fly1" for 1 drone). When set, Isaac Sim enables '
+                'the isaacsim.ros2.bridge extension and publishes /clock '
+                'plus /<ns>/isaac_odom via an OmniGraph. Empty disables '
+                'the ROS 2 bridge path.'
             ),
         ),
         DeclareLaunchArgument(
