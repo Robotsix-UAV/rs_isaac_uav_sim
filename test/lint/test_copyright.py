@@ -19,5 +19,13 @@ import pytest
 @pytest.mark.copyright
 @pytest.mark.linter
 def test_copyright():
-    rc = main(argv=['.'])
+    # Scan only this package's source directories. We deliberately
+    # exclude colcon's ``install/`` (which holds Dirk Thomas-authored
+    # setup helpers shipped with colcon — different copyright, not
+    # ours to relicense) and ``build/`` / ``log/``.
+    # ament_copyright auto-skips ``setup.py`` next to ``package.xml``,
+    # so we list directories only.
+    rc = main(argv=[
+        'rs_isaac_uav_sim', 'launch', 'isaac_run', 'scripts', 'test',
+    ])
     assert rc == 0, 'Found copyright errors'
