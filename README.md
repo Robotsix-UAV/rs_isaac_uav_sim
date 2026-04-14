@@ -95,6 +95,10 @@ that boot Isaac Sim end-to-end:
   client, asserts AUTO.TAKEOFF + AUTO.LOITER hover stability (skipped unless
   `PX4_SITL_BUILD_DIR` is set)
 
+Both integration tests run Isaac Sim headless by default. Set
+`RS_ISAAC_TEST_HEADLESS=0` to launch the GUI for local debugging — CI
+behavior (default headless) is unchanged.
+
 ## License
 
 Apache License 2.0 — see [LICENSE](LICENSE).

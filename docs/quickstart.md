@@ -90,6 +90,19 @@ The integration tests boot a fresh Isaac Sim subprocess for each test method,
 so the first test pays a ~30 s cold-start cost while Isaac Sim populates its
 shader cache. Subsequent runs are fast.
 
+By default the integration tests launch Isaac Sim headless. To watch them
+run in the GUI (useful for local debugging, X11 forwarding already set up
+in the Docker image), set `RS_ISAAC_TEST_HEADLESS=0`:
+
+```bash
+RS_ISAAC_TEST_HEADLESS=0 colcon test --packages-select rs_isaac_uav_sim \
+  --event-handlers console_direct+ \
+  --ctest-args -R test_px4_sitl_takeoff
+```
+
+Accepted falsy values: `0`, `false`, `no`. Anything else (or unset) keeps
+the tests headless — CI behavior is unchanged.
+
 ## Troubleshooting
 
 **`vkCreateInstance failed` / GUI window doesn't open** — check `DISPLAY` is

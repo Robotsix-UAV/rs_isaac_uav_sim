@@ -54,6 +54,18 @@ _CTRL_HOVER = _HOVER_OMEGA / _OMEGA_MAX
 _CTRL_LIFTOFF = _HOVER_OMEGA * math.sqrt(1.15) / _OMEGA_MAX
 
 
+def _headless_args():
+    """Return ['--headless'] unless RS_ISAAC_TEST_HEADLESS is set to a falsy value.
+
+    Set RS_ISAAC_TEST_HEADLESS=0 (or 'false'/'no') to launch Isaac Sim with the
+    GUI for local debugging. CI keeps the default (headless).
+    """
+    val = os.environ.get('RS_ISAAC_TEST_HEADLESS', '1').strip().lower()
+    if val in ('0', 'false', 'no', ''):
+        return []
+    return ['--headless']
+
+
 def _resolve_isaac_python():
     candidate = os.environ.get('ISAAC_SIM_PYTHON', '')
     if candidate and os.path.isfile(candidate):
@@ -121,7 +133,7 @@ class TestMavlinkScenarios(unittest.TestCase):
         # start_new_session=True puts the child in its own process group so
         # tearDown can kill the entire group (python.sh + Isaac Sim grandchild).
         self._sim_process = subprocess.Popen(
-            [self._isaac_python, self._sim_script, '--headless', '--num_drones', '1'],
+            [self._isaac_python, self._sim_script, *_headless_args(), '--num_drones', '1'],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
             start_new_session=True,

@@ -47,6 +47,18 @@ import unittest
 PX4_CUSTOM_MODE_AUTO_LOITER = (3 << 24) | (4 << 16)
 
 
+def _headless_args() -> list[str]:
+    """Return ['--headless'] unless RS_ISAAC_TEST_HEADLESS is set to a falsy value.
+
+    Set RS_ISAAC_TEST_HEADLESS=0 (or 'false'/'no') to launch Isaac Sim with the
+    GUI for local debugging. CI keeps the default (headless).
+    """
+    val = os.environ.get('RS_ISAAC_TEST_HEADLESS', '1').strip().lower()
+    if val in ('0', 'false', 'no', ''):
+        return []
+    return ['--headless']
+
+
 def _resolve_isaac_python() -> str | None:
     candidate = os.environ.get('ISAAC_SIM_PYTHON', '')
     if candidate and os.path.isfile(candidate):
@@ -203,7 +215,7 @@ class TestPX4SitlTakeoff(unittest.TestCase):
             [
                 self._isaac_python,
                 self._sim_script,
-                '--headless',
+                *_headless_args(),
                 '--num_drones', '1',
                 '--config', self._config,
             ],
