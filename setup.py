@@ -27,6 +27,8 @@ setup(
     license='Apache-2.0',
     tests_require=['pytest'],
     entry_points={
-        'console_scripts': [],
+        'console_scripts': [
+            'mocap_rate_limiter = rs_isaac_uav_sim.mocap_rate_limiter:main',
+        ],
     },
 )

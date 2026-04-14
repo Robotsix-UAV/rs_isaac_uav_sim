@@ -9,6 +9,7 @@ ament_python_install_package(${PROJECT_NAME})
 install(PROGRAMS
   isaac_run/scene_mavlink_sim.py
   scripts/live_flight_demo.py
+  scripts/mocap_rate_limiter
   DESTINATION lib/${PROJECT_NAME}
 )
 
