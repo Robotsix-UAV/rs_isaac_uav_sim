@@ -33,7 +33,6 @@ from .sensors import (
     GPSSensor,
     IMUSensor,
     MagnetometerSensor,
-    VisualOdometrySensor,
 )
 from .state import VehicleState
 
@@ -104,27 +103,33 @@ class DroneSimManager:
         # Per-drone simulation components
         self.states = [VehicleState() for _ in range(self.num_drones)]
         self.dynamics = [QuadrotorDynamics(self.quad_params) for _ in range(self.num_drones)]
+        # Sensor wiring driven by SensorParams.localization_mode (XOR):
+        #   - 'gps'   → GPS + magnetometer streamed over MAVLink
+        #              (HIL_GPS / HIL_SENSOR), PX4 EKF runs GPS+baro+mag.
+        #   - 'mocap' → no GPS, no MAVLink position source. Ground truth
+        #              odometry is exposed on /<drone>/isaac_odom by the
+        #              ROS2PublishOdometry OmniGraph node (see
+        #              scene_mavlink_sim.py); an external bridge forwards
+        #              it to /fmu/in/vehicle_visual_odometry.
+        loc = self._sensor_params.localization_mode
         self.imu_sensors = [IMUSensor(self.sensor_params) for _ in range(self.num_drones)]
-        if self._sensor_params.use_gps:
-            self.gps_sensors = [
-                GPSSensor(self.sensor_params, self.gps_origin) for _ in range(self.num_drones)
-            ]
-        else:
-            self.vo_sensors = [
-                VisualOdometrySensor(self.sensor_params.visual_odometry)
-                for _ in range(self.num_drones)
-            ]
         self.baro_sensors = [
             BarometerSensor(self.sensor_params, self.gps_origin) for _ in range(self.num_drones)
         ]
         self.mag_sensors = [
             MagnetometerSensor(self.sensor_params, self.gps_origin) for _ in range(self.num_drones)
         ]
+        if loc == 'gps':
+            self.gps_sensors = [
+                GPSSensor(self.sensor_params, self.gps_origin) for _ in range(self.num_drones)
+            ]
+        else:
+            self.gps_sensors = []
         self.backends = [
             PX4MavlinkHIL(
                 vehicle_id=i + 1, params=self.mavlink_params,
                 quad_params=self.quad_params,
-                use_gps=self._sensor_params.use_gps,
+                localization_mode=loc,
                 verbose=self._verbose,
             )
             for i in range(self.num_drones)
@@ -410,16 +415,12 @@ class DroneSimManager:
             backend = self.backends[i]
             backend.update_sensors(imu_data, baro_data, mag_data)
 
-            # --- 4. GPS / Visual Odometry at ~50 Hz ---
-            if send_gps:
-                if self._sensor_params.use_gps:
-                    gps_data = self.gps_sensors[i].update(state, dt * self._gps_divider)
-                    backend.update_gps(gps_data)
-                    self._last_gps_vo[i] = gps_data
-                else:
-                    vo_data = self.vo_sensors[i].update(state, dt * self._gps_divider)
-                    backend.update_visual_odometry(vo_data)
-                    self._last_gps_vo[i] = vo_data
+            # --- 4. GPS at ~50 Hz (only in 'gps' mode; 'mocap' mode
+            #        relies on Isaac OmniGraph → ROS bridge → PX4) ---
+            if send_gps and self._sensor_params.localization_mode == 'gps':
+                gps_data = self.gps_sensors[i].update(state, dt * self._gps_divider)
+                backend.update_gps(gps_data)
+                self._last_gps_vo[i] = gps_data
 
             # --- 5. MAVLink update: send HIL data, receive motor commands ---
             backend.update()
@@ -585,23 +586,14 @@ class DroneSimManager:
                 f' alt={gt_alt:.2f} m'
             )
 
-            if gps_vo:
-                if self._sensor_params.use_gps:
-                    print(
-                        f'  [SENSORS] GPS lat={gps_vo.get("latitude", float("nan")):.6f}°'
-                        f'  lon={gps_vo.get("longitude", float("nan")):.6f}°'
-                        f'  alt={gps_vo.get("altitude", float("nan")):.2f} m'
-                        f'  vN={gps_vo.get("velocity_north", float("nan")):.3f}'
-                        f'  vE={gps_vo.get("velocity_east", float("nan")):.3f}'
-                        f'  vD={gps_vo.get("velocity_down", float("nan")):.3f} m/s'
-                    )
-                else:
-                    q = gps_vo.get('q', [float('nan')] * 4)
-                    print(
-                        f'  [SENSORS] VIO pos(NED)=[{gps_vo.get("x", float("nan")):.3f},'
-                        f'{gps_vo.get("y", float("nan")):.3f},'
-                        f'{gps_vo.get("z", float("nan")):.3f}] m'
-                        f'  q=[{q[0]:.3f},{q[1]:.3f},{q[2]:.3f},{q[3]:.3f}]'
+            if gps_vo and self._sensor_params.localization_mode == 'gps':
+                print(
+                    f'  [SENSORS] GPS lat={gps_vo.get("latitude", float("nan")):.6f}°'
+                    f'  lon={gps_vo.get("longitude", float("nan")):.6f}°'
+                    f'  alt={gps_vo.get("altitude", float("nan")):.2f} m'
+                    f'  vN={gps_vo.get("velocity_north", float("nan")):.3f}'
+                    f'  vE={gps_vo.get("velocity_east", float("nan")):.3f}'
+                    f'  vD={gps_vo.get("velocity_down", float("nan")):.3f} m/s'
                     )
 
     def close(self):

@@ -19,7 +19,7 @@
 import numpy as np
 from scipy.spatial.transform import Rotation
 
-from .config import GPSOrigin, SensorParams, VisualOdometryParams
+from .config import GPSOrigin, SensorParams
 from .state import flu_to_frd, VehicleState
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -352,103 +352,6 @@ class GPSSensor:
             'latitude_gt': np.degrees(lat_gt),
             'longitude_gt': np.degrees(lon_gt),
             'altitude_gt': state.position[2] + origin.alt,
-        }
-
-
-# ═══════════════════════════════════════════════════════════════════════════════
-# Visual Odometry Sensor
-# ═══════════════════════════════════════════════════════════════════════════════
-
-
-class VisualOdometrySensor:
-    """Simulated visual odometry with position/velocity/attitude noise and bias random walk."""
-
-    def __init__(self, params: VisualOdometryParams = VisualOdometryParams()):
-        self._p = params
-        self._pos_bias = np.zeros(3)
-        self._vel_bias = np.zeros(3)
-
-    def update(self, state: VehicleState, dt: float) -> dict:
-        """
-        Compute noisy visual odometry readings.
-
-        Args
-        ----
-        state
-            Current vehicle state.
-        dt
-            Timestep in seconds.
-
-        Returns
-        -------
-        dict
-            dict with position (x,y,z), velocity (vx,vy,vz), attitude (q),
-            and angular rates (rollspeed, pitchspeed, yawspeed) in NED/FRD.
-
-        """
-        p = self._p
-
-        # ENU position/velocity -> NED
-        pos_ned = state.get_position_ned()
-        vel_ned = state.get_linear_velocity_ned()
-
-        # Position bias random walk
-        tau_p = p.pos_correlation_time
-        sigma_p_d = (1.0 / np.sqrt(dt)) * p.pos_noise_density
-        sigma_b_p = p.pos_random_walk
-        sigma_b_p_d = np.sqrt(
-            -sigma_b_p**2 * tau_p / 2.0 * (np.exp(-2.0 * dt / tau_p) - 1.0)
-        )
-        phi_p_d = np.exp(-dt / tau_p)
-
-        pos_noisy = np.zeros(3)
-        for i in range(3):
-            self._pos_bias[i] = (
-                phi_p_d * self._pos_bias[i] + sigma_b_p_d * np.random.randn()
-            )
-            pos_noisy[i] = pos_ned[i] + sigma_p_d * np.random.randn() + self._pos_bias[i]
-
-        # Velocity bias random walk
-        tau_v = p.vel_correlation_time
-        sigma_v_d = (1.0 / np.sqrt(dt)) * p.vel_noise_density
-        sigma_b_v = p.vel_random_walk
-        sigma_b_v_d = np.sqrt(
-            -sigma_b_v**2 * tau_v / 2.0 * (np.exp(-2.0 * dt / tau_v) - 1.0)
-        )
-        phi_v_d = np.exp(-dt / tau_v)
-
-        vel_noisy = np.zeros(3)
-        for i in range(3):
-            self._vel_bias[i] = (
-                phi_v_d * self._vel_bias[i] + sigma_b_v_d * np.random.randn()
-            )
-            vel_noisy[i] = vel_ned[i] + sigma_v_d * np.random.randn() + self._vel_bias[i]
-
-        # Attitude quaternion in NED/FRD with small orientation noise
-        q_ned_frd = state.get_attitude_ned_frd()  # [qx, qy, qz, qw]
-        sigma_att_d = (1.0 / np.sqrt(dt)) * p.att_noise_density
-        att_rot = Rotation.from_quat(q_ned_frd)
-        noise_rotvec = sigma_att_d * np.random.randn(3)
-        att_noisy = (Rotation.from_rotvec(noise_rotvec) * att_rot).as_quat()
-        # Return as [w, x, y, z]
-        q_out = np.array([att_noisy[3], att_noisy[0], att_noisy[1], att_noisy[2]])
-
-        # Angular rates in FRD body frame with noise
-        ang_vel_frd = state.get_angular_velocity_frd()
-        sigma_ang_d = (1.0 / np.sqrt(dt)) * p.att_noise_density
-        ang_vel_noisy = ang_vel_frd + sigma_ang_d * np.random.randn(3)
-
-        return {
-            'x': pos_noisy[0],
-            'y': pos_noisy[1],
-            'z': pos_noisy[2],
-            'vx': vel_noisy[0],
-            'vy': vel_noisy[1],
-            'vz': vel_noisy[2],
-            'q': q_out,
-            'rollspeed': ang_vel_noisy[0],
-            'pitchspeed': ang_vel_noisy[1],
-            'yawspeed': ang_vel_noisy[2],
         }
 
 

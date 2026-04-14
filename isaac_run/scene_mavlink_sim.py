@@ -36,7 +36,7 @@ parser.add_argument('--verbose', action='store_true',
                     help='Enable verbose MAVLink warnings')
 parser.add_argument('--ros2_namespaces', type=str, default='',
                     help=('Comma-separated list of ROS 2 namespaces, one '
-                          'per drone (e.g. "crazy2fly1,crazy2fly2"). When '
+                          'per drone (e.g. "drone_0,drone_1"). When '
                           'set, Isaac Sim enables the isaacsim.ros2.bridge '
                           'extension and publishes /clock plus '
                           '<ns>/isaac_odom (nav_msgs/Odometry) from an '
@@ -167,26 +167,25 @@ def setup_environment(world):
 def _setup_ros2_bridge_graph(
     isaac_namespaces: list, ros2_namespaces: list
 ) -> str:
-    """Build an OmniGraph that publishes /clock + per-drone Odometry.
+    """
+    Build an OmniGraph that publishes /clock + per-drone Odometry.
 
-    Args
-    ----
-    isaac_namespaces
-        Prim-side namespace per drone (e.g. ``drone_0``). Used to build
-        the chassis prim path ``/World/{ns}/basic_quadrotor``.
-    ros2_namespaces
-        ROS 2 topic namespace per drone (e.g. ``crazy2fly1``). Used for
-        the published topic: ``/<ns>/isaac_odom`` so downstream LS2N
-        nodes, which already subscribe on per-drone namespaces, get
-        their odometry without remapping.
+    :param isaac_namespaces: Prim-side namespace per drone (e.g.
+        ``drone_0``). Used to build the chassis prim path
+        ``/World/{ns}/basic_quadrotor``.
+    :param ros2_namespaces: ROS 2 topic namespace per drone (e.g.
+        ``drone_0``). Used for the published topic
+        ``/<ns>/isaac_odom`` so downstream consumers, which already
+        subscribe on per-drone namespaces, get their odometry without
+        remapping.
 
     The graph contains one ``OnPlaybackTick`` + ``IsaacReadSimulationTime``
     pair driving every publisher, which keeps node count low even for
     multi-drone scenes. ``ROS2PublishOdometry`` emits Isaac's native ENU
     world frame with body-frame twist (``publishRawVelocities=False``
-    rotates world velocities into the chassis frame); the LS2N-side
-    ``odom_enu_to_nwu_bridge`` takes care of the ENU→NWU conversion
-    expected by ``mocap/odom``.
+    rotates world velocities into the chassis frame); any conversion to
+    a different world convention (NWU, NED, etc.) is the responsibility
+    of the downstream consumer.
     """
     # Enable the bridge extension lazily so users who don't ask for
     # ROS 2 pay nothing at startup. We must do this BEFORE creating
@@ -235,9 +234,10 @@ def _setup_ros2_bridge_graph(
                 f'{node_compute}.inputs:chassisPrim',
                 [usdrt.Sdf.Path(prim_path)],
             ),
-            # Publish per-drone on /<ros_ns>/isaac_odom. The downstream
-            # ENU→NWU bridge picks it up and feeds the LS2N drone_bridge
-            # on /<ros_ns>/mocap/odom.
+            # Publish per-drone on /<ros_ns>/isaac_odom. Downstream ROS
+            # bridges (e.g. an ENU→NED converter) are expected to pick
+            # this up and forward to PX4's vehicle_visual_odometry topic
+            # under /<ros_ns>/fmu/in/.
             (f'{node_publish}.inputs:topicName', 'isaac_odom'),
             (f'{node_publish}.inputs:nodeNamespace', f'/{ros_ns}'),
             (f'{node_publish}.inputs:odomFrameId', 'world_enu'),
@@ -429,8 +429,9 @@ def main():
     # headless MAVLink HIL).
     if bridge_graph_path is not None:
         import omni.graph.core as _og
-        _evaluate_bridge = lambda _p=bridge_graph_path: (
-            _og.Controller.evaluate_sync(_p))
+
+        def _evaluate_bridge(_p=bridge_graph_path):
+            _og.Controller.evaluate_sync(_p)
     else:
         _evaluate_bridge = None
 

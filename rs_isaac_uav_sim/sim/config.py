@@ -88,36 +88,7 @@ class QuadrotorParams:
         )
 
 
-@dataclass
-class VisualOdometryParams:
-    """Noise parameters for the visual odometry sensor."""
-
-    # Position noise
-    pos_noise_density: float = 0.005   # m/sqrt(Hz)
-    pos_random_walk: float = 0.001     # m*sqrt(Hz)
-    pos_correlation_time: float = 60.0  # s
-
-    # Velocity noise
-    vel_noise_density: float = 0.005   # (m/s)/sqrt(Hz)
-    vel_random_walk: float = 0.001     # (m/s)*sqrt(Hz)
-    vel_correlation_time: float = 10.0  # s
-
-    # Attitude noise
-    att_noise_density: float = 1e-4    # rad/sqrt(Hz)
-
-    @classmethod
-    def from_dict(cls, d: Dict[str, Any]) -> 'VisualOdometryParams':
-        """Construct from a dict, falling back to dataclass defaults for missing keys."""
-        defaults = cls()
-        return cls(
-            pos_noise_density=d.get('pos_noise_density', defaults.pos_noise_density),
-            pos_random_walk=d.get('pos_random_walk', defaults.pos_random_walk),
-            pos_correlation_time=d.get('pos_correlation_time', defaults.pos_correlation_time),
-            vel_noise_density=d.get('vel_noise_density', defaults.vel_noise_density),
-            vel_random_walk=d.get('vel_random_walk', defaults.vel_random_walk),
-            vel_correlation_time=d.get('vel_correlation_time', defaults.vel_correlation_time),
-            att_noise_density=d.get('att_noise_density', defaults.att_noise_density),
-        )
+LOCALIZATION_MODES = ('gps', 'mocap')
 
 
 @dataclass
@@ -153,18 +124,30 @@ class SensorParams:
     mag_random_walk: float = 6.4e-6  # gauss*sqrt(Hz)
     mag_bias_correlation_time: float = 6.0e2  # s
 
-    # Mode selection
-    use_gps: bool = True
-
-    # Visual odometry
-    visual_odometry: 'VisualOdometryParams' = field(
-        default_factory=lambda: VisualOdometryParams()
-    )
+    # Localization mode (mutually exclusive). Selects how the simulated
+    # vehicle's position estimate reaches PX4:
+    #   - "gps":   simulated GPSSensor + magnetometer are streamed to PX4
+    #              via HIL_GPS / HIL_SENSOR. PX4's EKF uses GPS+baro+mag.
+    #              Matches the iris reference setup.
+    #   - "mocap": no GPS or VISION_POSITION_ESTIMATE is sent over MAVLink.
+    #              Isaac's ROS2PublishOdometry node exposes ground-truth
+    #              odometry on /<drone>/isaac_odom; an external ROS bridge
+    #              is expected to forward it (after any frame conversion
+    #              and noise injection) to /fmu/in/vehicle_visual_odometry.
+    #              Mirrors a real-hardware setup where motion-capture is
+    #              the sole position source.
+    localization_mode: str = 'gps'
 
     @classmethod
     def from_dict(cls, d: Dict[str, Any]) -> 'SensorParams':
         """Construct from a dict, falling back to dataclass defaults for missing keys."""
         defaults = cls()
+        mode = d.get('localization_mode', defaults.localization_mode)
+        if mode not in LOCALIZATION_MODES:
+            raise ValueError(
+                f'sensor.localization_mode must be one of {LOCALIZATION_MODES}, '
+                f'got {mode!r}'
+            )
         return cls(
             gyro_noise_density=d.get('gyro_noise_density', defaults.gyro_noise_density),
             gyro_random_walk=d.get('gyro_random_walk', defaults.gyro_random_walk),
@@ -195,10 +178,7 @@ class SensorParams:
             mag_bias_correlation_time=d.get(
                 'mag_bias_correlation_time', defaults.mag_bias_correlation_time
             ),
-            use_gps=d.get('use_gps', defaults.use_gps),
-            visual_odometry=VisualOdometryParams.from_dict(
-                d.get('visual_odometry', {})
-            ),
+            localization_mode=mode,
         )
 
 
@@ -227,7 +207,7 @@ class MavlinkParams:
 
 @dataclass
 class GPSOrigin:
-    """GPS origin for the simulation (Nantes, France)."""
+    """GPS origin for the simulation. Override via the ``gps_origin`` block in the YAML config."""
 
     lat: float = 47.24926  # deg
     lon: float = -1.54844  # deg

@@ -128,26 +128,15 @@ sensor:
   # Bias correlation time [s]
   mag_bias_correlation_time: 600.0
 
-  # --- Mode selection ---
-  # true = use GPS, false = use visual odometry
-  use_gps: true
-
-  # --- Visual Odometry ---
-  visual_odometry:
-    # Position noise spectral density [m/sqrt(Hz)]
-    pos_noise_density: 0.005
-    # Position random-walk coefficient [m*sqrt(Hz)]
-    pos_random_walk: 0.001
-    # Position bias correlation time [s]
-    pos_correlation_time: 60.0
-    # Velocity noise spectral density [(m/s)/sqrt(Hz)]
-    vel_noise_density: 0.005
-    # Velocity random-walk coefficient [(m/s)*sqrt(Hz)]
-    vel_random_walk: 0.001
-    # Velocity bias correlation time [s]
-    vel_correlation_time: 10.0
-    # Attitude noise spectral density [rad/sqrt(Hz)]
-    att_noise_density: 0.0001
+  # --- Localization mode ---
+  # 'gps':   simulated GPSSensor + magnetometer streamed to PX4 over
+  #          MAVLink (HIL_GPS / HIL_SENSOR). PX4's EKF uses GPS+baro+mag.
+  # 'mocap': nothing position-related is sent over MAVLink. Isaac's
+  #          ROS2PublishOdometry node exposes ground-truth odometry on
+  #          /<drone>/isaac_odom; an external bridge is expected to
+  #          forward it to /fmu/in/vehicle_visual_odometry.
+  # iris is the GPS reference setup.
+  localization_mode: gps
 
 gps_origin:
   # Reference latitude [deg]  (default: Nantes, France)

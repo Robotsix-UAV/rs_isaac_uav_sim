@@ -101,15 +101,14 @@ PX4 airframe.
 | `mag_random_walk` | gauss·√Hz | `6.4e-06` |
 | `mag_bias_correlation_time` | s | `600.0` |
 
-### Mode + visual odometry fallback
+### Localization mode
 
 | key | type | default | meaning |
 |---|---|---|---|
-| `use_gps` | bool | `true` | If `false`, use the visual odometry sensor instead |
-| `visual_odometry.pos_noise_density` | m/√Hz | `0.005` | VO position noise |
-| `visual_odometry.pos_random_walk` | m·√Hz | `0.001` | VO position bias random walk |
-| `visual_odometry.vel_noise_density` | (m/s)/√Hz | `0.005` | VO velocity noise |
-| `visual_odometry.att_noise_density` | rad/√Hz | `0.0001` | VO attitude noise |
+| `localization_mode` | str | `gps` | `gps` or `mocap` (mutually exclusive) |
+
+- **`gps`** — Simulated `GPSSensor` + `MagnetometerSensor` are streamed to PX4 over MAVLink (`HIL_GPS` and the magnetometer fields of `HIL_SENSOR`). PX4's EKF runs GPS + baro + mag. This is the iris reference setup.
+- **`mocap`** — No `HIL_GPS` and no `VISION_POSITION_ESTIMATE` is sent over MAVLink. Isaac's `ROS2PublishOdometry` OmniGraph node exposes ground-truth odometry on `/<drone>/isaac_odom` (requires `--ros2_namespaces` to be passed to the launch). An external ROS bridge is expected to subscribe to that topic and forward the (frame-converted, noise-injected as the consumer wishes) odometry to PX4 on `/<drone>/fmu/in/vehicle_visual_odometry`. Mirrors a real-hardware setup where motion-capture is the sole position source.
 
 ## `gps_origin:`
 
